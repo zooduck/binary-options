@@ -1,0 +1,21 @@
+@import "../../node_modules/font-awesome/scss/font-awesome";
+@import "../../node_modules/ionicons/dist/scss/ionicons";
+
+
+[class^="ion-"], [class^="fa fa-"] {
+	font-size: 2em;
+	color: $icon-base;
+
+	&:hover:not(.disabled) {
+		&:before, &:after {
+			color: lighten($icon-base, 25%);			
+		}
+			
+	}
+	&.disabled {
+		pointer-events: none;
+		&:before, &:after {
+			opacity: 0.5;
+		}
+	}
+}
