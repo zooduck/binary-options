@@ -42,33 +42,73 @@
         <!-- // -->
 
 
+
+
+        <div class="zoobinary__sidebar">            
+            <div>
+                <i class="ion-md-settings zoobinary__sidebar__icon"></i>
+            </div>
+        </div>
+
+        <div class="zoobinary__settings-container">
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setCapital">
+                    <label for="zoobinaryFormInput_capital">CAPITAL</label>
+                    <input id="zoobinaryFormInput_capital" name="capital" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setCapital">set capital</button>
+            </div>
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setBrokerReturn">
+                    <label for="zoobinaryFormInput_brokerReturn">BROKER RETURN</label>
+                    <input id="zoobinaryFormInput_brokerReturn" name="brokerReturn" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setBrokerReturn">set broker return</button>
+            </div> 
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setMartingales">
+                    <label for="zoobinaryFormInput_martingales">MARTINGALES</label>
+                    <input id="zoobinaryFormInput_martingales" name="martingales" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setMartingales">set martingales</button>
+            </div>
+            
+        </div> 
+
+
+
+
         <div class="zoobinary__flexbox_container">
 
             <div class="zoobinary__header">                
                 <div class="zoobinary__header__logo">
-                    <img class="zoobinary__header__logo__icon_img" src="../img/iconmonstr-chart-6.svg" />                         
+                  
+                    <!-- <img class="zoobinary__header__logo__icon_img" src="../img/iconmonstr-chart-6.svg" />  -->                        
+                  
                    <!--  <svg width="50" height="25" class="zoobinary__header__logo__icon">
                         <use xlink:href="#zoobinaryIcon" x="0" y="0" />
                     </svg> -->
 
+
+
                     <div class="zoobinary__header__logo__title">
                         <!-- <ion-icon class="ion-md-trending-up"></ion-icon> -->
-                        <span>ZOOBINARY</span>
+                        <span>ZOOBINARY</span>                        
                     </div>
                     <!-- <div class="zoobinary__header__logo__desc">Martingale Calculator for Binary Options</div> -->
                 </div>
-                <div class="zoobinary__header__item">
+               <!--  <div class="zoobinary__header__item">
                     <span class="zoobinary__header__item__key__martingale">MARTINGALE</span>
                     <span class="zoobinary__header__item__val">6</span>
                 </div>
                 <div class="zoobinary__header__item">
                     <span class="zoobinary__header__item__key__return">RETURN</span>
                     <span class="zoobinary__header__item__val">85%</span>
-                </div>
+                </div> -->
                 <div class="zoobinary__header__item__capital">
                     <div class="zoobinary__header__item__key"><!-- CAPITAL --></div>
-                    <div class="zoobinary__header__item__capital__key">£1000.00</div>
-                    <div class="zoobinary__header__item__capital__val">+1.00%</div>
+                    <div class="zoobinary__header__item__capital__key" data-bind="betData.capital"></div>
+                    <!-- <div class="zoobinary__header__item__capital__val">+1.00%</div> -->
                 </div>
             </div>
         </div>
@@ -76,27 +116,36 @@
 
 
 
-        <div class="zoobinary__flexbox_container__panel">
+        <div class="zoobinary__flexbox_container__panel three-dimensional">
             <div class="zoobinary__panel_main left">
                 <div class="zoobinary__panel_main__item martingales">
-                    <div class="zoobinary__panel_main__item__val">2</div>
+                    <div class="zoobinary__panel_main__item__val">
+                        <span class="current-martingale" data-bind="betData.martingaleIterationNumber"></span>
+                        <span class="total-martingales">/</span>
+                        <span class="total-martingales" data-bind="betData.martingales"></span>
+                    </div>
                 </div>
             </div>
             <div class="zoobinary__panel_main right">
                 <div class="zoobinary__panel_main__item bet">
-                    <div class="zoobinary__panel_main__item__key__bet">TRADE</div>
-                    <div class="zoobinary__panel_main__item__val__bet">£13.00</div>
+                    <div class="zoobinary__panel_main__item__key__bet"><!--<i class="ion-md-pricetags"></i>--><i class="fa fa-area-chart"></i></div>
+                    <div class="zoobinary__panel_main__item__val__bet" data-bind="betData.bet"></div>
                 </div>
                 <div class="zoobinary__panel_main__item win"> 
-                   <div class="zoobinary__panel_main__item__key">WIN</div>
-                    <div class="zoobinary__panel_main__item__val">£4.25 / 1.25%</div>
+                   <div class="zoobinary__panel_main__item__key"><i class="ion-md-happy"></i></div>
+                    <div class="zoobinary__panel_main__item__val" data-bind="betData.win"></div>
                 </div>
                 <div class="zoobinary__panel_main__item lose">
-                    <div class="zoobinary__panel_main__item__key">LOSE</div>
-                    <div class="zoobinary__panel_main__item__val">-£19.00 / -8.06%</div>
+                    <div class="zoobinary__panel_main__item__key"><i class="ion-md-sad"></i></div>
+                    <div class="zoobinary__panel_main__item__val" data-bind="betData.lose"></div>
                 </div>
             </div>
         </div>
+
+
+
+
+
 
         <!-- super container -->
         <div class="super-container">
@@ -116,6 +165,10 @@
             </content>    -->
             
         </div> <!-- .super-container -->
+
+
+
+        
 
 
     </body>

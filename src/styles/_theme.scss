@@ -3,16 +3,57 @@ body#zoobinary {
 	font: $font-weight-base $font-size-base-standard $font-family-base;
 	color: $color-base;
 	overflow: hidden;
-
-	@media only screen and (max-width: 450px) {
-		font-size: $font-size-base-mobile;
+	
+	@media only screen and (max-width: 450px) {		
+		font-size: $font-size-base-mobile;		
 	}
 }
 
 
+
+
+
 .zoobinary {
+	&__sidebar {
+		position:absolute;
+		left:0;
+		top: 0;
+		width: 40px;
+		height: 100vh;
+		background: lighten(darkslateblue, 20%);
+	}
+	&__sidebar__icon {
+		color: darkslateblue;
+		font-size: 32px;
+		padding: 5px;
+
+		&:hover:not(.disabled) {
+			&:before, &:after {
+				color: lighten(darkslateblue, 10%);			
+			}
+				
+		}
+	}
+
+	&__settings-container {
+		position: absolute;
+		z-index: 999;
+		left: 0;
+		top: 350px;
+		width: 100vw;
+		height: 100vh;
+		overflow: scroll;
+		background: #eee;
+		color: black;
+		font-size: 2em;
+		input, button {
+			font-size: 1.5em;
+		}
+	}
+
 	&__flexbox_container, &__flexbox_container__panel {
-		display: flex;		
+		display: flex;
+		margin-left: 40px;	
 		//padding: 10px;
 
 		&__wrap {
@@ -22,13 +63,14 @@ body#zoobinary {
 		&__panel {
 			margin: 10px;
 			margin-top: 20px;
+			margin-left: 50px;
 		}
 	}
 	&__header {
 		// flex-grow: 1;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-end;
+		justify-content: space-between;
 		//align-items: flex-start;
 		flex-basis: 100%;
 		background: #222;
@@ -37,7 +79,7 @@ body#zoobinary {
 		&__logo {
 			display: flex;
 			align-items: center;
-			flex-basis: 100%;
+			// flex-basis: 100%;
 			margin-bottom: 10px;
 
 			&__icon {
@@ -85,8 +127,8 @@ body#zoobinary {
 
 			&__key {			
 				text-align: left;
-				//word-break: break-word;
-				text-transform: uppercase;
+				// word-break: break-word;
+				// text-transform: uppercase;				
 
 
 				&__martingale {
@@ -134,47 +176,83 @@ body#zoobinary {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			background: #c5c5;
+			// background: #c5c5;
 			flex-basis: 100%;
 			//border: solid 1px blue;
 			margin: 5px;
 			padding: 2px 5px;
 			overflow: hidden;
+			//transition: all 0.5s;
+			border: solid 3px transparent;	
 		}
+
 		
 		&__item.martingales {
 			justify-content: center;
-			transform: rotateY(-35deg);
-			box-shadow: 20px 0px 35px #222;			
+			border: solid 2px #eee;
+			// background: #eee;
+			// color: darkslateblue;
+			// transform: rotateY(-35deg);
+			// box-shadow: 20px 0px 35px #222;			
 		}
 		&__item.bet {
-			background: rgba(204, 85, 204, 0.33);
+			// background: rgba(204, 85, 204, 0.33);
+			background: transparent;
 			color: #eee;
-			transform: rotateY(10deg);	
+			border: solid 3px #eee;
+			//transform: rotateY(10deg);	
 		}
 		&__item.win {
-			background: limegreen;
-			color: darkgreen;
-			transform: rotateY(10deg);			
+			// background: limegreen;
+			// color: darkgreen;
+			//transform: rotateY(10deg);			
 		}
 		&__item.lose {
-			background: brown;
-			color: #eee;
-			transform: rotateY(10deg);			
+			// background: brown;
+			// color: #eee;
+			//transform: rotateY(10deg);			
 		}
 		&__item.martingales .zoobinary__panel_main__item__val {
-			font: normal 7em arial, sans-serif;
+			font-family: arial, sans-serif;
+			
+			.current-martingale {
+				font-size: 6em;
+			}
+
+			.total-martingales {
+				font-size: 2em;
+			}
 		}
 	}
 	&__panel_main__item__key, &__panel_main__item__val {
 		//flex-grow: 1;
 		font-size: 2em;
+		i {
+			font-size: 1.5em;
+			color: #eee;
+		}
+	}
+	&__panel_main__item__key {
+		margin-left: 5px;
+		margin-right: 10px;
 	}
 	&__panel_main__item__val {
 		flex-shrink: 0;
+		margin-right: 5px;
 	}
 	&__panel_main__item__key__bet, &__panel_main__item__val__bet {
 		font-size: 3.5em;
+		i {
+			font-size: 80%;
+			color: #eee;
+		}
+	}
+	&__panel_main__item__key__bet {
+		margin-left: 5px;
+		margin-right: 10px;
+	}
+	&__panel_main__item__val__bet {
+		margin-right: 5px;
 	}
 	&__panel_main.left {
 		display: flex;
@@ -190,9 +268,25 @@ body#zoobinary {
 	&__panel_main.right {
 		display: flex;
 		flex-direction: column;
-		flex-grow: 2;
+		flex-grow: 4;
 		perspective: 100vw;
 		perspective-origin: center;
 	}
 	//&__panel_main__flex_container
+}
+
+.zoobinary__flexbox_container__panel.three-dimensional {
+	.zoobinary__panel_main.left {
+		.zoobinary__panel_main__item.martingales {
+			transform: rotateY(-15deg);
+			// box-shadow: 20px 0px 35px #222;
+		}
+	}
+	.zoobinary__panel_main.right {
+		.zoobinary__panel_main__item {
+			&.bet, &.win, &.lose {
+				// transform: rotateY(10deg);
+			}			
+		}
+	}
 }
