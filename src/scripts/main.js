@@ -3,9 +3,20 @@ import {docHtml, docBody, ctrl_setCapital, ctrl_setBrokerReturn, ctrl_setMarting
 
 // Services...
 import {testService} from "./services/test_service";
-import {configService} from "./services/config.service";
+// import {configService} from "./services/config.service";
+
 import {martingaleService} from "./services/martingale.service";
 import {betDataService} from "./services/bet_data.service";
+
+// ============================================================================
+// TODO: SEEMS WRONG THAT WE NEED TO INIT THESE HERE, THINK OF A BETTER WAY!
+// ============================================================================
+import {viewDataService} from "./services/view_data.service";
+viewDataService();
+import {settingsService} from "./services/settings.service";
+settingsService();
+import {dataService} from "./services/data.service";
+dataService();
 
 // Event Listeners...
 
@@ -19,8 +30,9 @@ for (let ctrl of Array.from(ctrls)) {
 	ctrl.addEventListener("click", function (e) {
 		let form = this.parentNode.querySelector("form");
 		let formData = new FormData(form);
-		// update config...
-		configService().set(formData);
+		// update settings...
+		////////configService().set(formData);
+		settingsService().set(formData);
 		// update martingale data...
 		martingaleService().getStackedMartingales().then( (martingaleData) => {
 			betDataService().set(martingaleData);
@@ -34,6 +46,12 @@ for (let ctrl of Array.from(ctrls)) {
 // Test...
 console.log("docHtml:", docHtml, "docBody:", docBody);
 testService().exposedMethod();
+//import {_Zoobinary} from "./super/Zoobinary.super";
+
+
+
+
+
 //configService().init();
 
 // martingaleService().getStackedMartingales().then( (martingaleData) => {

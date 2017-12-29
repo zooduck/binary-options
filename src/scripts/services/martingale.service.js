@@ -1,18 +1,25 @@
 //import {config} from "../config/config";
-import {configService} from "./config.service";
+// import {configService} from "./config.service";
 import {genericService} from "./generic.service";
+// import {_Zoobinary} from "../super/Zoobinary.super";
+import {settingsService} from "./settings.service";
+import {dataService} from "./data.service";
 
 export const martingaleService = (function () {
 	
-	const config = configService().get();
+	// const config = configService().get();
+	const settings = settingsService().get();
 
-	if (Object.keys(config).length < 1) {
-		alert("config.service was not imported before martingale.service");
+	console.log("settings:", settings);
+
+	if (Object.keys(settings).length < 1) {
+		console.error("settings.service was not imported before martingale.service");
 		return;
 	}
 
-	const $calcBet = (combinedBets, martingaleIteration, singleBet) => {		
-		let cover = combinedBets / config.brokerReturn;
+	const $calcBet = (combinedBets, martingaleIteration, singleBet) => {
+		
+		let cover = combinedBets / settings.brokerReturn;
 		let nextBet = singleBet * martingaleIteration;
 		return cover + nextBet;		
 	};
@@ -21,8 +28,7 @@ export const martingaleService = (function () {
 		let combinedBets = 0;
 		let bets = [];
 		let martingaleIteration = 1;
-		for (let n = 0, l = config.martingales; n < l; n++) {
-			
+		for (let n = 0, l = settings.martingales; n < l; n++) {			
 			// console.log("martingaleIteration", martingaleIteration);
 			let bet = $calcBet(combinedBets, martingaleIteration, singleBet);
 			bets.push(bet);		
@@ -37,45 +43,47 @@ export const martingaleService = (function () {
 	};
 
 	const $martingaleData = (betsArr) => {
-	    // NOTE: betsArr is an array of bet percentages as floats (12.5% = 0.125)	
+		// -------------------------------------------------------------------------
+	    // NOTE: betsArr is an array of bet percentages as floats (12.5% = 0.125)
+	    // -------------------------------------------------------------------------
 		let currencyFloatTotal = 0;
 		let percentFloatTotal = 0;
 		let percentCeilTotal = 0;
-		const betsData = [];
+		const martingaleBets = [];
 		betsArr.forEach(function(betPercent, index) {
 			let percentFloat = betPercent;
 			percentFloatTotal += percentFloat;
 			console.log(percentFloat, percentFloatTotal);
-			let currencyFloat = config.capital * (betPercent / 100);
+			let currencyFloat = settings.capital * (betPercent / 100);
 			currencyFloatTotal += currencyFloat;
 			let currencyCeil = Math.ceil(currencyFloat);
 			let currencyCeilTotal = Math.ceil(currencyFloatTotal);
 
-			let percentCeil = currencyCeil / (config.capital / 100);
+			let percentCeil = currencyCeil / (settings.capital / 100);
 			percentCeilTotal += percentCeil;
 
 			//let percentCeil = Math.ceil(percentFloat);
 			//let percentCeilTotal = Math.ceil(percentFloatTotal);
 
 
-			let currencyFloatReturnGross = currencyFloat * config.brokerReturn;
+			let currencyFloatReturnGross = currencyFloat * settings.brokerReturn;
 			let currencyFloatReturnNet = currencyFloatReturnGross;
-			let currencyCeilReturnGross = currencyCeil * config.brokerReturn;
+			let currencyCeilReturnGross = currencyCeil * settings.brokerReturn;
 			let currencyCeilReturnNet = currencyCeilReturnGross;
-			let percentFloatReturnGross = percentFloat * config.brokerReturn;
+			let percentFloatReturnGross = percentFloat * settings.brokerReturn;
 			let percentFloatReturnNet = percentFloatReturnGross;
-			let percentCeilReturnGross = percentCeil * config.brokerReturn;
+			let percentCeilReturnGross = percentCeil * settings.brokerReturn;
 			let percentCeilReturnNet = percentCeilReturnGross;
 			
-			if (betsData[index-1]) {
+			if (martingaleBets[index-1]) {
 				// subtract previous total from gross...
-				currencyFloatReturnNet = currencyFloatReturnGross - betsData[index-1].currencyFloatTotal;
-				currencyCeilReturnNet = currencyCeilReturnGross - betsData[index-1].currencyCeilTotal;
-				percentFloatReturnNet = percentFloatReturnGross - betsData[index-1].percentFloatTotal;
-				percentCeilReturnNet = percentCeilReturnGross - betsData[index-1].percentCeilTotal;
+				currencyFloatReturnNet = currencyFloatReturnGross - martingaleBets[index-1].currencyFloatTotal;
+				currencyCeilReturnNet = currencyCeilReturnGross - martingaleBets[index-1].currencyCeilTotal;
+				percentFloatReturnNet = percentFloatReturnGross - martingaleBets[index-1].percentFloatTotal;
+				percentCeilReturnNet = percentCeilReturnGross - martingaleBets[index-1].percentCeilTotal;
 			}			
 
-			betsData.push({
+			martingaleBets.push({
 				currencyFloat: $float(currencyFloat),
 				currencyFloatTotal: $float(currencyFloatTotal),
 				currencyFloatReturnGross: $float(currencyFloatReturnGross),
@@ -95,28 +103,17 @@ export const martingaleService = (function () {
 			});
 		});
 
-		console.table(betsData);		
-		return betsData;
+		console.table(martingaleBets);
+		dataService().set({martingaleBets: martingaleBets});
+		//_Zoobinary.data.martingaleBets = betsData;		
+		return martingaleBets;
 	};
 
-	const $testing = () => {
-		return "sultanas";
-	};
 
 	return function () {
 		
 		return {
-			getStackedMartingales____: function getStackedMartingales () {
-				return new Promise((resolve, reject) => {
-					setTimeout(function(){
-						let rtn = $testing();
-						resolve(rtn);
-					}, 5000);
-					
-				});
-			},
-
-			getStackedMartingales: function getStackedMartingales () {
+			getStackedMartingales: function getStackedMartingales () {		
 
 				// ------------------------------------------------------------------
 				// we must return a Promise because using setInterval for the loop!
@@ -133,11 +130,12 @@ export const martingaleService = (function () {
 
 					const calcBetsInterval = setInterval(function(){
 						let bets = $calcBets(singleBet);
+
 						let totalBets = bets.reduce(genericService().arraySum);				
 						if (totalBets <= targetMax && totalBets >= targetMin) {
 							clearInterval(calcBetsInterval);
 							console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
-							console.table(config);							
+							console.table(settings);							
 							resolve($martingaleData(bets));
 							// return $martingaleData(bets);
 						}

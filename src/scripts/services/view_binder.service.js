@@ -1,6 +1,27 @@
+const flatten = require("flat");
+import {_Zoobinary} from "../super/Zoobinary.super";
 export const viewBinderService = (function () {
 
-	const $bind = (dataObj = {name: null, data: null}) => {
+	const $bind = () => {
+		// TEST TO UPDATE ALL data-bind ELEMENTS IN THE DOM (much like $scope.$apply() in AngularJS)
+		let boundEls = document.querySelectorAll("[data-bind]");
+		console.log("boundEls", boundEls);
+
+		let flatData = flatten(_Zoobinary);
+		console.log("flat test", flatData);
+
+		//let boundElsCollection = {}
+		for (let el of boundEls) {
+			//boundElsCollection[el.dataset.bind] = el;
+			//console.log("el.dataset.bind", el.dataset.bind, "test[el.dataset.bind]", test[el.dataset.bind]);
+			if (flatData[el.dataset.bind]) {
+				el.innerHTML = flatData[el.dataset.bind];
+			} else console.error(`[data-bind] value for ${el.dataset.bind} not found`);
+			
+		}
+	};
+
+	const $bind_ERR = (dataObj = {name: null, data: null}) => {
 		console.warn("updating the view...");
 		// ------------------------------------------------------------------------------------
 		// data: an object with keys that reference "zoo-bind" attribute values
@@ -10,6 +31,32 @@ export const viewBinderService = (function () {
 		//            and we would not want to update both instances of "balance" in the view
 		//            when updating "balance" property of the "current" object.
 		// -------------------------------------------------------------------------------------
+
+
+
+		// TEST TO UPDATE ALL data-bind ELEMENTS IN THE DOM (much like $scope.$apply() in AngularJS)
+		let boundEls__ = document.querySelectorAll("[data-bind]");
+		console.log("boundEls__", boundEls__);
+
+		let test = flatten(_Zoobinary);
+		console.log("flat test", test);
+
+		//let boundElsCollection = {}
+		for (let el of boundEls__) {
+			//boundElsCollection[el.dataset.bind] = el;
+			//console.log("el.dataset.bind", el.dataset.bind, "test[el.dataset.bind]", test[el.dataset.bind]);
+			if (test[el.dataset.bind]) {
+				el.innerHTML = test[el.dataset.bind];
+			} else console.error(`[data-bind] value for ${el.dataset.bind} not found`);
+			
+		}
+
+		//console.log("boundElsCollection", boundElsCollection);
+
+		return;
+
+
+
 
 		if (!dataObj.name || !dataObj.data) {
 			return;
