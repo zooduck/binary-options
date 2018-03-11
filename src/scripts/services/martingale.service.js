@@ -1,7 +1,7 @@
 //import {config} from "../config/config";
 // import {configService} from "./config.service";
 import {genericService} from "./generic.service";
-// import {_Zoobinary} from "../super/Zoobinary.super";
+// import {_Zoobinary} from "../global/zoobinary";
 import {settingsService} from "./settings.service";
 import {dataService} from "./data.service";
 

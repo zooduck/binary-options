@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta name="author" content="zooduck">
         <link rel="manifest" href="./manifest.json">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <title>ZOOBINARY</title>
     </head>
     <body id="zoobinary">
 
 
         <!-- svg -->
-        <svg width="0" height="0" style="display: none;">
+        <svg width="0" height="0" style="display: none">
             <defs>
                 <g id="zoobinaryIcon">
                     <rect x="0" y="0" width="5" height="25" class="zoobinary__header__logo__icon__rect__up" />
@@ -27,28 +28,77 @@
                 </g>           
             </defs>
         </svg>
-        <!-- // -->                            
+        <!-- // svg -->                            
 
 
         <!-- templates -->
-        <!-- // -->
+        <!-- // templates -->
 
 
-        <!-- loading screen -->
-        <!-- // -->
+        <!-- loading-screen -->
+        <!-- // loading-screen -->
        
         
         <!-- alert -->
-        <!-- // -->
+        <!-- // alert -->
 
 
 
+        <div class="zoobinary__panel__main">
+            
+           <!--  <div class="subpanel-A">
+                <i class="material-icons md-48 md-light">menu</i>
+            </div> -->
 
-        <div class="zoobinary__sidebar">            
-            <div>
-                <i class="ion-md-settings zoobinary__sidebar__icon"></i>
+            <div class="subpanel-B">
+
+                <div class="subpanel-C">
+                    <i class="ctrl material-icons md-36 md-light">menu</i>
+                    <span class="item title">ZOOBINARY</span>
+                    <span class="item capital" data-bind="view.header.capital"></span>
+                </div>
+
+                <div class="subpanel-D">
+                    <span class="item" data-bind="view.header.brokerRtn">&nbsp;</span>
+                </div>
+
+                <div class="subpanel-E">
+
+                    <div class="subpanel-F">
+                        <span class="current-martingale" data-bind="view.bet.martingaleIterationNumber"></span>
+                        <span class="total-martingales">/</span>
+                        <span class="total-martingales" data-bind="view.bet.martingales"></span>
+                    </div>
+
+                    <div class="subpanel-G">
+
+                        <div class="item bet">
+                            <i class="material-icons md-light md-48">stars</i>
+                            <div data-bind="view.bet.currency"></div>
+                        </div>
+
+                        <div class="item win">           
+                            <i class="material-icons md-light md-48">sentiment_very_satisfied</i>                    
+                            <div data-bind="view.bet.win"></div>
+                        </div>
+
+                        <div class="item lose">
+                            <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                            <div data-bind="view.bet.lose"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-        </div>
+
+        </div><!-- // zoobinary__panel__main -->
+
+
+
+
+
 
         <div class="zoobinary__settings-container">
             <div class="zoobinary__settings-container__setting">
@@ -71,103 +121,8 @@
                     <input id="zoobinaryFormInput_martingales" name="martingales" type="text" />
                 </form>
                 <button id="zoobinaryFormCtrl_setMartingales">set martingales</button>
-            </div>
-            
-        </div> 
-
-
-
-
-        <div class="zoobinary__flexbox_container">
-
-            <div class="zoobinary__header">                
-                <div class="zoobinary__header__logo">
-                  
-                    <!-- <img class="zoobinary__header__logo__icon_img" src="../img/iconmonstr-chart-6.svg" />  -->                        
-                  
-                   <!--  <svg width="50" height="25" class="zoobinary__header__logo__icon">
-                        <use xlink:href="#zoobinaryIcon" x="0" y="0" />
-                    </svg> -->
-
-
-
-                    <div class="zoobinary__header__logo__title">
-                        <!-- <ion-icon class="ion-md-trending-up"></ion-icon> -->
-                        <span>ZOOBINARY</span>                        
-                    </div>
-                    <!-- <div class="zoobinary__header__logo__desc">Martingale Calculator for Binary Options</div> -->
-                </div>
-               <!--  <div class="zoobinary__header__item">
-                    <span class="zoobinary__header__item__key__martingale">MARTINGALE</span>
-                    <span class="zoobinary__header__item__val">6</span>
-                </div>
-                <div class="zoobinary__header__item">
-                    <span class="zoobinary__header__item__key__return">RETURN</span>
-                    <span class="zoobinary__header__item__val">85%</span>
-                </div> -->
-                <div class="zoobinary__header__item__capital">
-                    <div class="zoobinary__header__item__key"><!-- CAPITAL --></div>
-                    <!-- <div class="zoobinary__header__item__capital__key" data-bind="betData.capital"></div> -->
-                    <div class="zoobinary__header__item__capital__key" data-bind="view.header.capital"></div>
-                    <!-- <div class="zoobinary__header__item__capital__val">+1.00%</div> -->
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="zoobinary__flexbox_container__panel three-dimensional">
-            <div class="zoobinary__panel_main left">
-                <div class="zoobinary__panel_main__item martingales">
-                    <div class="zoobinary__panel_main__item__val">
-                        <span class="current-martingale" data-bind="view.bet.martingaleIterationNumber"></span>
-                        <span class="total-martingales">/</span>
-                        <span class="total-martingales" data-bind="view.bet.martingales"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="zoobinary__panel_main right">
-                <div class="zoobinary__panel_main__item bet">
-                    <div class="zoobinary__panel_main__item__key__bet"><!--<i class="ion-md-pricetags"></i>--><i class="fa fa-area-chart"></i></div>
-                    <div class="zoobinary__panel_main__item__val__bet" data-bind="view.bet.currency"></div>
-                </div>
-                <div class="zoobinary__panel_main__item win"> 
-                   <div class="zoobinary__panel_main__item__key"><i class="ion-md-happy"></i></div>
-                    <div class="zoobinary__panel_main__item__val" data-bind="view.bet.win"></div>
-                </div>
-                <div class="zoobinary__panel_main__item lose">
-                    <div class="zoobinary__panel_main__item__key"><i class="ion-md-sad"></i></div>
-                    <div class="zoobinary__panel_main__item__val" data-bind="view.bet.lose"></div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-        <!-- super container -->
-        <div class="super-container">
-
-            <!-- <header>
-                <div>HEADER...</div>
-            </header>
-
-            <content>
-                <div>CONTENT...</div>
-                <div>IMG TEST:</div>
-                <img src=".././img/example.jpg" alt="example.jpg" />
-                <div>HREF IMAGE TEST:</div>
-                <div>
-                    <a href=".././img/example.jpg" target="_blank">example.jpg</a>
-                </div>
-            </content>    -->
-            
-        </div> <!-- .super-container -->
-
-
+            </div>            
+        </div> <!-- // zoobinary__settings-container -->
 
 
 

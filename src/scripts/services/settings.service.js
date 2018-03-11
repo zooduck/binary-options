@@ -1,9 +1,9 @@
-import {_Zoobinary} from "../super/Zoobinary.super";
+import {zoobinary} from "../global/zoobinary";
 
 export const settingsService = (function settingsService () {
 	
 	const $init = () => {		
-		_Zoobinary.settings = {
+		zoobinary.settings = {
 			capital: 0.00,
 			open: 0.00,
 			brokerReturn: 0.85,
@@ -29,9 +29,9 @@ export const settingsService = (function settingsService () {
 			if (typeof val != types[key]) {
 				console.error(`Invalid type! Expected ${types[key]} but got ${typeof val}.`);
 				return;
-			} else if (val) _Zoobinary.settings[key] = val;					
+			} else if (val) zoobinary.settings[key] = val;					
 		}
-		console.log("_Zoobinary updated:", _Zoobinary);
+		console.log("zoobinary updated:", zoobinary);
 	};
 
 	const $setWithFormData = function $setWithFormData (formData) {
@@ -48,7 +48,7 @@ export const settingsService = (function settingsService () {
 	};
 
 
-	console.log("_Zoobinary", _Zoobinary);
+	console.log("zoobinary", zoobinary);
 
 	return function () {
 		return {
@@ -59,9 +59,9 @@ export const settingsService = (function settingsService () {
 				return $set(data);
 			},
 			get: (key = null) => {				
-				if (typeof key === "string" && _Zoobinary.settings[key]) {
-					return _Zoobinary.settings[key];
-				} else return _Zoobinary.settings;
+				if (typeof key === "string" && zoobinary.settings[key]) {
+					return zoobinary.settings[key];
+				} else return zoobinary.settings;
 			}
 		}
 	}

@@ -1,9 +1,9 @@
-import {_Zoobinary} from "../super/Zoobinary.super";
+import {zoobinary} from "../global/zoobinary";
 
 export const dataService = (function dataService () {
 	
 	const $init = () => {		
-		_Zoobinary.data = {
+		zoobinary.data = {
 			martingaleBets: [],
 			martingaleIterationSlot: 0,
 			martingaleIterationNumber: 1
@@ -13,18 +13,18 @@ export const dataService = (function dataService () {
 	$init();
 
 	const $get = () => {
-		return _Zoobinary.data;
+		return zoobinary.data;
 	};
 
 	const $set = function $set (data = {}) {
 		for (let key in data) {
 			let val = data[key];			
-			if (val) _Zoobinary.data[key] = val;					
+			if (val) zoobinary.data[key] = val;					
 		}
-		console.log("_Zoobinary updated:", _Zoobinary);
+		console.log("zoobinary updated:", zoobinary);
 	};
 
-	console.log("_Zoobinary", _Zoobinary);
+	console.log("zoobinary", zoobinary);
 
 	return function () {
 		return {

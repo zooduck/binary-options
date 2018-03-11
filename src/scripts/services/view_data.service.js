@@ -1,11 +1,8 @@
-import {_Zoobinary} from "../super/Zoobinary.super";
-const flatten = require("flat");
-const unflatten = flatten.unflatten;
-
+import {zoobinary} from "../global/zoobinary";
 export const viewDataService = (function viewDataService () {
 	
 	const $init = () => {		
-		_Zoobinary.view = {
+		zoobinary.view = {
 			header: {},
 			bet: {},
 			settings: {}
@@ -15,11 +12,11 @@ export const viewDataService = (function viewDataService () {
 	$init();
 
 	const $get = () => {
-		return _Zoobinary.view;
+		return zoobinary.view;
 	};
 
 	const $set = (data) => {
-		_Zoobinary.view = data;
+		zoobinary.view = data;
 	};
 
 	const $setItem = (prop, val) => {
@@ -27,7 +24,7 @@ export const viewDataService = (function viewDataService () {
 		view[prop] = val;
 	};
 
-	console.log("_Zoobinary", _Zoobinary);
+	console.log("zoobinary", zoobinary);
 
 	return function () {
 		return {
