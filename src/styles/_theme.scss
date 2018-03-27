@@ -1,7 +1,7 @@
 body#zoobinary {
-	background-color: $background-color-base;
+	background-color: $background-color-base-dark;
 	font: $font-weight-base $font-size-base-standard $font-family-base;
-	color: $color-base;
+	color: $color-base-dark;
 	overflow: hidden;
 
 	
@@ -10,12 +10,16 @@ body#zoobinary {
 	// }
 }
 
+[data-template] {
+	display: none !important;
+}
+
 .ctrl {
 	cursor: pointer;
 }
 
 
-.zoobinary__panel, .zoobinary__panel__main {
+.zoobinary__panel, .zoobinary__panel__main, .zoobinary__panel__settings {
 	display: flex;
 }
 .zoobinary__panel__main {
@@ -30,6 +34,8 @@ body#zoobinary {
 	display: flex;
 	flex-grow: 1;
 	flex-wrap: wrap;
+	// background-color: rgba(0, 0, 0, 0.85);
+	// color: #fff;
 }
 .zoobinary__panel__main .subpanel-C {
 	display: flex;
@@ -37,7 +43,9 @@ body#zoobinary {
 	align-items: baseline;
 	flex-basis: 100%;
 	font-size: 2.5em;
-	background-color: #222;
+	background-color: rgba(0, 0, 0, 0.1);
+	// background-color: rgba(255, 255, 255, .045);
+	// color: #fff;
 	padding: 5px 10px 5px 5px;
 }
 .zoobinary__panel__main .subpanel-C .item {
@@ -52,19 +60,20 @@ body#zoobinary {
 	display: flex;
 	flex-basis: 100%;
 	justify-content: flex-end;	
-	padding: 0 10px 5px 10px;
-	background-color: #222;
 	color: #fff;
 }
 .zoobinary__panel__main .subpanel-D .item {
-	font-size: 1.5em;	
+	font-size: 1.5em;
+	padding: 5px;
+	margin-right: 10px;
+	flex-shrink: 0;
 }
 
 .zoobinary__panel__main .subpanel-E {
 	display: flex;
 	flex-wrap: wrap;
 	flex-basis: 100%;
-	padding: 0 20px 20px 20px;
+	padding: 0 20px 20px 0;
 }
 
 .zoobinary__panel__main .subpanel-F {
@@ -72,7 +81,8 @@ body#zoobinary {
 	flex-grow: 1;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;	
+	margin-top: 20px;
+	margin-left: 20px;	
 	border: solid 1px #fff;
 }
 .zoobinary__panel__main .subpanel-F span {
@@ -97,10 +107,94 @@ body#zoobinary {
 	font-size: 2.5em;
 	padding: 10px;
 }
+.zoobinary__panel__main .subpanel-G .item div:first-of-type {
+	display: flex;
+	align-items: center;
+}
+.zoobinary__panel__main .subpanel-G .item div:first-of-type span {
+	margin-left: 10px;
+}
 .zoobinary__panel__main .subpanel-G .item.bet {
 	font-size: 3.5em;
 	border: solid #fff;
 }
+
+
+
+.zoobinary__panel__settings {
+	position: fixed;
+	flex-direction: column;
+	width: 320px;
+	height: calc(100vh - 59px);
+	// padding: 0 10px;
+	// background-color: $background-color-base-dark;
+	// color: $color-base-dark;
+	top: 59px;
+	left: -320px;
+	transition: left .25s;
+	overflow-y: scroll;
+	background-color: $background-color-base-dark;
+	border-top: dashed rgba(255, 255, 255, 0.1);
+}
+.zoobinary__panel__settings.active {
+	left: 0;
+}
+.zoobinary__panel__settings [class*="subpanel-"] {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	// margin-top: 10px;
+	// background-color: rgba(0, 0, 0, .85);
+}
+// .zoobinary__panel__settings [class*="subpanel-"]:not(:first-of-type) {
+// 	margin-top: 10px;
+// }
+.zoobinary__panel__settings [class*="subpanel-"] .header {
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 5px;
+}
+.zoobinary__panel__settings [class*="subpanel-"] .title {
+	font-weight: bold;
+	align-self: center;	
+}
+.zoobinary__panel__settings [class*="subpanel-"] .items {
+	display: none;
+	flex-direction: column;
+}
+.zoobinary__panel__settings [class*="subpanel-"] .items.active {
+	display: flex;
+}
+.zoobinary__panel__settings [class*="subpanel-"] .item {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+.zoobinary__panel__settings [class*="subpanel-"] .item .desc {
+	color: rgba(255, 255, 255, .5);
+	text-align: justify;
+	margin: 5px 0;
+}
+.zoobinary__panel__settings [class*="subpanel-"] .item input {
+	background-color: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	border: none;
+	padding: 5px;
+}
+.zoobinary__panel__settings .subpanel-A {
+	// border: solid 1px;
+}
+.zoobinary__panel__settings .subpanel-B {
+	// border: solid 1px;
+}
+.zoobinary__panel__settings .subpanel-C {
+	// border: solid 1px;
+}
+.zoobinary__panel__settings .subpanel-D {
+	// border: solid 1px;
+}
+
 
 
 
@@ -113,9 +207,9 @@ body#zoobinary {
 .zoobinary__settings-container {
 	position: absolute;
 	z-index: 999;
-	left: 0;
-	top: 550px;
-	width: 100vw;
+	right: 0;
+	top: 450px;
+	width: 50%;
 	height: 100vh;
 	overflow: scroll;
 	background: #eee;

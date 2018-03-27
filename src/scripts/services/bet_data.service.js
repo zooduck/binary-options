@@ -31,7 +31,7 @@ export const betDataService = (function () {
 		// TODO: use Floats or Ceils based on settings
 		// =================================================
 		
-		console.log("martingaleBet:", martingaleBet);
+		console.log(`martingaleBet for iteration ${data.martingaleIterationSlot}:`, martingaleBet);
 
 		const viewObj = {
 			header: {

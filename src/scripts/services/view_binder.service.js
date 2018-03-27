@@ -1,79 +1,68 @@
 import {zoobinary} from "../global/zoobinary";
 export const viewBinderService = (function () {
 
+	const $clearDataTemplates = (dataTemplates) => {
+		for (const el of dataTemplates) {
+			const children = Array.from(el.parentNode.children);
+			for (const child of children) {
+				if (!child.hasAttribute("data-template")) {
+					el.parentNode.removeChild(child);
+				}
+			}
+		}		
+	};
+
+	const $setVal = (el, viewVal, dataBind) => {
+		if (viewVal) {
+			el.innerHTML = viewVal;
+			el.value = viewVal;
+			return true;
+		} else return false;
+	};
+
 	const $bind = () => {
-		// ===================================================================================
-		// UPDATE ALL data-bind ELEMENTS IN THE DOM (much like $scope.$apply() in AngularJS)
-		// ===================================================================================
+		// =========================================================================================
+		// UPDATE ALL data-bind type ELEMENTS IN THE DOM (much like $scope.$apply() in AngularJS)
+		// =========================================================================================
 		let boundEls = document.querySelectorAll("[data-bind]");
 		for (const el of boundEls) {			
 			const evalStr = `zoobinary.${el.dataset.bind}`;
 			const viewVal = eval(evalStr);
-			if (viewVal) {
-				el.innerHTML = viewVal;
-			} else console.error(`[data-bind] value for ${el.dataset.bind} not found`);			
+			if (!$setVal(el, viewVal, el.dataset.bind)) {
+				console.error(`[data-bind] value for ${el.dataset.bind} not found`);
+			}						
+		}
+		const boundCheckboxEls = document.querySelectorAll("[data-checked]");
+		for (const el of boundCheckboxEls) {
+			const evalStr = `zoobinary.${el.dataset.checked}`;
+			const viewVal = eval(evalStr);
+			el.checked = viewVal;
+		}
+		const dataTemplates = document.querySelectorAll("[data-template]");
+
+		$clearDataTemplates(dataTemplates);
+
+		for (const dataTemplate of dataTemplates) {
+
+			const evalStr = `zoobinary.${dataTemplate.dataset.template}`;
+			const templateArray = eval(evalStr);
+			
+			for (const item of Array.from(templateArray)) {
+				const templateEl = dataTemplate.cloneNode(true);
+				templateEl.removeAttribute("data-template");
+				const boundEls = templateEl.querySelectorAll("[data-template-bind]");
+								
+				for (const boundEl of boundEls) {
+					const evalStr = `item.${boundEl.dataset.templateBind}`;
+					const viewVal = eval(evalStr);					
+					if (!$setVal(boundEl, viewVal, boundEl.dataset.templateBind)) {
+						console.error(`[data-template-bind] value for ${boundEl.dataset.templateBind} not found`);
+					}
+				}
+				dataTemplate.parentNode.appendChild(templateEl);				
+			}
 		}
 	};
-
-	// const $bind_ERR = (dataObj = {name: null, data: null}) => {
-	// 	console.warn("updating the view...");
-	// 	// ------------------------------------------------------------------------------------
-	// 	// data: an object with keys that reference "zoo-bind" attribute values
-	// 	// name: the object name of the attribute value, "someObjectName.someValue"
-	// 	// 			  so that we only update values for the specified object (data)
-	// 	//            for example, we might have current.balance and open.balance
-	// 	//            and we would not want to update both instances of "balance" in the view
-	// 	//            when updating "balance" property of the "current" object.
-	// 	// -------------------------------------------------------------------------------------
-
-
-	// 	// TEST TO UPDATE ALL data-bind ELEMENTS IN THE DOM (much like $scope.$apply() in AngularJS)
-	// 	let boundEls__ = document.querySelectorAll("[data-bind]");
-	// 	console.log("boundEls__", boundEls__);
-
-	// 	let test = flatten(zoobinary);
-	// 	console.log("flat test", test);
-
-	// 	//let boundElsCollection = {}
-	// 	for (let el of boundEls__) {
-	// 		//boundElsCollection[el.dataset.bind] = el;
-	// 		//console.log("el.dataset.bind", el.dataset.bind, "test[el.dataset.bind]", test[el.dataset.bind]);
-	// 		if (test[el.dataset.bind]) {
-	// 			el.innerHTML = test[el.dataset.bind];
-	// 		} else console.error(`[data-bind] value for ${el.dataset.bind} not found`);
-			
-	// 	}
-
-	// 	//console.log("boundElsCollection", boundElsCollection);
-
-	// 	return;
-
-
-
-
-	// 	if (!dataObj.name || !dataObj.data) {
-	// 		return;
-	// 	}
-	// 	let pattern = new RegExp(`${dataObj.name}.`);		
-	// 	let boundEls = document.querySelectorAll("[data-bind]");
-	// 	let boundElsObj = {};
-	// 	for (let boundEl of Array.from(boundEls)) {
-	// 		let attrVal = boundEl.attributes["data-bind"].value;
-	// 		// console.log("pattern", pattern, "attrVal", attrVal);
-	// 		if (attrVal.match(pattern)) {
-	// 			boundElsObj[boundEl.attributes["data-bind"].value] = boundEl;
-	// 		}			
-	// 	}
-	// 	// console.log("boundElsObj", boundElsObj);
-	// 	for (let zooBindVal in boundElsObj) {
-	// 		// --------------------------------------------
-	// 		// zooBindVal = betData.capital, for example
-	// 		// strip out object prefix...
-	// 		// --------------------------------------------
-	// 		let attrVal = zooBindVal.replace(pattern, "");
-	// 		boundElsObj[zooBindVal].innerHTML = dataObj.data[attrVal];
-	// 	}
-	// };
 
 	return function () {
 		return {

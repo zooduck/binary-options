@@ -25,10 +25,10 @@
                     <rect x="35" y="20" width="5" height="1.25" class="zoobinary__header__logo__icon__rect__down" />
                     <rect x="40" y="21.25" width="5" height="3.525" class="zoobinary__header__logo__icon__rect__down" />
                     <rect x="45" y="0" width="5" height="25" class="zoobinary__header__logo__icon__rect__up" />
-                </g>           
+                </g>
             </defs>
         </svg>
-        <!-- // svg -->                            
+        <!-- // svg -->
 
 
         <!-- templates -->
@@ -37,15 +37,15 @@
 
         <!-- loading-screen -->
         <!-- // loading-screen -->
-       
-        
+
+
         <!-- alert -->
         <!-- // alert -->
 
 
 
         <div class="zoobinary__panel__main">
-            
+
            <!--  <div class="subpanel-A">
                 <i class="material-icons md-48 md-light">menu</i>
             </div> -->
@@ -53,13 +53,20 @@
             <div class="subpanel-B">
 
                 <div class="subpanel-C">
-                    <i class="ctrl material-icons md-36 md-light">menu</i>
+                    <i class="ctrl material-icons md-36 md-light" id="ctrl__menu__toggle">menu</i>
                     <span class="item title">ZOOBINARY</span>
                     <span class="item capital" data-bind="view.header.capital"></span>
                 </div>
 
                 <div class="subpanel-D">
-                    <span class="item" data-bind="view.header.brokerRtn">&nbsp;</span>
+                    <div class="item">
+                        <span>Broker Return:</span>
+                        <span data-bind="settings.brokerReturn * 100 + '%'"></span>
+                    </div>
+                    <div class="item">
+                        <span>Martingales:</span>
+                        <span data-bind="settings.martingales"></span>
+                    </div>
                 </div>
 
                 <div class="subpanel-E">
@@ -73,17 +80,26 @@
                     <div class="subpanel-G">
 
                         <div class="item bet">
-                            <i class="material-icons md-light md-48">stars</i>
+                            <div>
+                                <i class="material-icons md-light md-48">stars</i>
+                                <span>BET</span>
+                            </div>
                             <div data-bind="view.bet.currency"></div>
                         </div>
 
-                        <div class="item win">           
-                            <i class="material-icons md-light md-48">sentiment_very_satisfied</i>                    
+                        <div class="item win">
+                            <div>
+                                <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
+                                <span>WIN</span>
+                            </div>
                             <div data-bind="view.bet.win"></div>
                         </div>
 
                         <div class="item lose">
-                            <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                            <div>
+                                <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                                <span>LOSE</span>
+                            </div>
                             <div data-bind="view.bet.lose"></div>
                         </div>
 
@@ -94,6 +110,114 @@
             </div>
 
         </div><!-- // zoobinary__panel__main -->
+
+
+
+        <!-- /\/\/\/\ -->
+        <!-- SETTINGS -->
+        <!-- /\/\/\/\ -->
+
+        <div class="zoobinary__panel__settings" id="settings">
+            <div class="subpanel-A" style="display: none">
+                <div class="header">
+                    <span class="title">SETTINGS</span>
+                     <i class="ctrl material-icons md-light" id="ctrl__settings__toggle">close</i>
+                </div>
+            </div>
+            <div class="subpanel-B">
+                <div class="header">
+                    <span class="title">BASIC</span>
+                    <i class="ctrl material-icons md-light" id="ctrl__settings__basic__toggle">expand_more</i>
+                </div>
+                <div class="items active" id="settings__basic">
+                    <div class="item">
+                        <label for="capital__SET">Capital</label>
+                        <span class="desc">Your current balance</span>
+                        <input
+                            type="text"
+                            name="capital"
+                            id="capital__SET"
+                            placeholder="1985.19"
+                            data-bind="settings.capital">
+                    </div>
+                    <div class="item">
+                        <label for="brokerReturn__SET">Broker Return</label>
+                        <span class="desc">The amount of return (as a percentage) that your broker will payout for a successful bet.</span>
+                        <input
+                            type="text"
+                            name="brokerReturn"
+                            id="brokerReturn__SET"
+                            placeholder="0.85"
+                            data-bind="settings.brokerReturn">
+                    </div>
+                    <div class="item">
+                        <label for="martingales__SET">Martingales</label>
+                        <span class="desc">The maximum number of martingales (failed bets) that you want to accomodate. Higher values = lower risk, lower payout. Lower values = Higher risk, Higher payout.</span>
+                        <input
+                            type="text"
+                            name="martingales"
+                            id="martingales__SET"
+                            placeholder="5"
+                            data-bind="settings.martingales">
+                    </div>
+                </div>
+            </div>
+            <div class="subpanel-C">
+                 <div class="header">
+                    <span class="title">ADVANCED</span>
+                    <i class="ctrl material-icons md-light" id="ctrl__settings__advanced__toggle">expand_more</i>
+                </div>
+                <div class="items" id="settings__advanced">
+                    <div class="item">
+                        <label for="open__SET">Open</label>
+                        <span class="desc">Set this to enable charts and stats</span>
+                        <input
+                            type="text"
+                            name="open"
+                            id="open__SET"
+                            placeholder="250.00"
+                            data-bind="settings.open">
+                    </div>
+                    <div class="item">
+                        <label for="roundUp__SET">Round-up bets</label>
+                        <span class="desc">Round up bets to nearest single unit of currency (Recommended)</span>
+                        <input type="checkbox" data-checked="settings.roundUpBets">
+                    </div>
+                </div>
+            </div>
+            <div class="subpanel-D">
+                <div class="header">
+                    <span class="title">MARTINGALES DETAIL</span>
+                    <i class="ctrl material-icons md-light" id="ctrl__settings__martingalesDetail__toggle">expand_more</i>
+                </div>
+                 <div class="items active" id="settings__martingalesDetail">
+                    <div class="item" data-template="data.martingaleBets">
+                        <!-- TODO!!! SUPER IMPORTANT! CHANGE data-template TO RETURN AN ITEM, SO IN THE EVENT THAT THE ARRAY CONTAINS SIMPLE OBJECTS (STRING) AND NOT AN OBJECT WE CAN STILL REFERENCE IT, FOR EX. item.currencyFloat (12.56) OR JUST item ("bananas") -->
+                        <span>currencyFloat:</span>
+                        <span data-template-bind="currencyFloat"></span>
+                        <span data-template-bind="currencyCeil"></span>
+                    </div>
+                    <!--  <div class="item" data-template="data.martingaleBets">
+                        <span>currencyCeil:</span>
+                        <span data-template-bind="currencyCeil"></span>
+                    </div> -->
+                 </div>
+            </div>
+        </div><!-- // zoobinary__panel__settings -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114,14 +238,14 @@
                     <input id="zoobinaryFormInput_brokerReturn" name="brokerReturn" type="text" />
                 </form>
                 <button id="zoobinaryFormCtrl_setBrokerReturn">set broker return</button>
-            </div> 
+            </div>
             <div class="zoobinary__settings-container__setting">
                 <form class="zoobinary__settings-container__form" id="zoobinaryForm_setMartingales">
                     <label for="zoobinaryFormInput_martingales">MARTINGALES</label>
                     <input id="zoobinaryFormInput_martingales" name="martingales" type="text" />
                 </form>
                 <button id="zoobinaryFormCtrl_setMartingales">set martingales</button>
-            </div>            
+            </div>
         </div> <!-- // zoobinary__settings-container -->
 
 

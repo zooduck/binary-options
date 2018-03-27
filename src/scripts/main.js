@@ -1,5 +1,7 @@
 // DOM...
-import {docHtml, docBody, ctrl_setCapital, ctrl_setBrokerReturn, ctrl_setMartingales} from "./services/dom_service";
+//import {docHtml, docBody, ctrl_setCapital, ctrl_setBrokerReturn, ctrl_setMartingales} from "./services/dom.service";
+import * as dom from "./services/dom.service";
+
 
 // Services...
 import {testService} from "./services/test_service";
@@ -7,6 +9,8 @@ import {testService} from "./services/test_service";
 
 import {martingaleService} from "./services/martingale.service";
 import {betDataService} from "./services/bet_data.service";
+
+import {viewBinderService} from "./services/view_binder.service";
 
 // ============================================================================
 // TODO: SEEMS WRONG THAT WE NEED TO INIT THESE HERE, THINK OF A BETTER WAY!
@@ -18,12 +22,14 @@ settingsService();
 import {dataService} from "./services/data.service";
 dataService();
 
-// Event Listeners...
+
+
+// Event Listeners (FOR TESTING ONLY)...
 
 const ctrls = [
-	ctrl_setCapital,
-	ctrl_setBrokerReturn,
-	ctrl_setMartingales
+	dom.ctrl_setCapital,
+	dom.ctrl_setBrokerReturn,
+	dom.ctrl_setMartingales
 ];
 
 for (let ctrl of Array.from(ctrls)) {
@@ -40,11 +46,27 @@ for (let ctrl of Array.from(ctrls)) {
 	});
 }
 
+
+
+// Event Listeners...
+import {eventListenersService} from "./services/event_listeners.service";
+
+
+
 // Init...
 
 
+eventListenersService().set();
+
+martingaleService().getStackedMartingales().then( (martingaleData) => {
+	betDataService().set(martingaleData);	
+});
+
+
+
+
 // Test...
-console.log("docHtml:", docHtml, "docBody:", docBody);
+console.log("dom.docHtml:", dom.docHtml, "dom.docBody:", dom.docBody);
 testService().exposedMethod();
 //import {_Zoobinary} from "./super/Zoobinary.super";
 

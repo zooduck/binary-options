@@ -4,10 +4,11 @@ export const settingsService = (function settingsService () {
 	
 	const $init = () => {		
 		zoobinary.settings = {
-			capital: 0.00,
-			open: 0.00,
+			capital: 10.00,
 			brokerReturn: 0.85,
-			martingales: 5
+			martingales: 5,
+			open: 10.00,
+			roundUpBets: true
 		}
 	}
 
