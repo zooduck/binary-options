@@ -191,16 +191,12 @@
                     <i class="ctrl material-icons md-light" id="ctrl__settings__martingalesDetail__toggle">expand_more</i>
                 </div>
                  <div class="items active" id="settings__martingalesDetail">
-                    <div class="item" data-template="data.martingaleBets">
-                        <!-- TODO!!! SUPER IMPORTANT! CHANGE data-template TO RETURN AN ITEM, SO IN THE EVENT THAT THE ARRAY CONTAINS SIMPLE OBJECTS (STRING) AND NOT AN OBJECT WE CAN STILL REFERENCE IT, FOR EX. item.currencyFloat (12.56) OR JUST item ("bananas") -->
+                    <div class="item" data-template="data.martingaleBets" data-template-item="bet">
                         <span>currencyFloat:</span>
-                        <span data-template-bind="currencyFloat"></span>
-                        <span data-template-bind="currencyCeil"></span>
+                        <span data-template-bind="bet.currencyFloat"></span>
+                        <span data-template-bind="bet.currencyCeil"></span>
+                        <span data-template-bind="bet"></span>
                     </div>
-                    <!--  <div class="item" data-template="data.martingaleBets">
-                        <span>currencyCeil:</span>
-                        <span data-template-bind="currencyCeil"></span>
-                    </div> -->
                  </div>
             </div>
         </div><!-- // zoobinary__panel__settings -->
