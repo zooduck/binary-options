@@ -109,8 +109,8 @@ export const martingaleService = (function () {
 		console.table(martingaleBets);
 		dataService().set({
 			martingaleBets: martingaleBets,
-			martingaleIterationSlot: data.martingaleIterationSlot}
-		);
+			martingaleIterationSlot: data.martingaleIterationSlot >= martingaleBets.length? 0 : data.martingaleIterationSlot
+		});
 		//_Zoobinary.data.martingaleBets = betsData;
 		return martingaleBets;
 	};
