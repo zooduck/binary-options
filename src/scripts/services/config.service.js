@@ -6,13 +6,13 @@ export const configService = (function () {
 		brokerReturn: "number",
 		martingales: "number"
 	};
-	const $init = function $init () {
-		// if no localStorage, use defaults...
-		// TODO!!! (CURRENTLY ALWAYS USING DEFAULTS)
-		Object.assign(config, configDefaults);
-	};
-
-	$init();
+	// const $init = function $init () {
+	// 	// if no localStorage, use defaults...
+	// 	// TODO!!! (CURRENTLY ALWAYS USING DEFAULTS)
+	// 	Object.assign(config, configDefaults);
+	// };
+	//
+	// $init();
 
 	const $set = function $set (data = {}) {
 		for (let key in data) {
@@ -24,7 +24,7 @@ export const configService = (function () {
 			if (typeof val != types[key]) {
 				console.error(`Invalid type! Expected ${types[key]} but got ${typeof val}.`);
 				return;
-			} else if (val) config[key] = val;					
+			} else if (val) config[key] = val;
 		}
 		console.log("config updated:", config);
 	};
@@ -35,9 +35,9 @@ export const configService = (function () {
 			let val = pair[1];
 			let data = {}
 			if (val) {
-				data[key] = val;			
+				data[key] = val;
 				$set(data);
-			}		
+			}
 		}
 	};
 
@@ -49,7 +49,7 @@ export const configService = (function () {
 				}
 				return $set(data);
 			},
-			get: (key = null) => {				
+			get: (key = null) => {
 				if (typeof key === "string" && config[key]) {
 					return config[key];
 				} else return config;

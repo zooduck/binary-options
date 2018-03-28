@@ -8,50 +8,59 @@ export const betDataService = (function () {
 
 	const betData = {};
 
-	const $init = function $init () {
-		// if no localStorage, use defaults...
-		// ============================================
-		// TODO!!! (CURRENTLY ALWAYS USING DEFAULTS)
-		// ============================================
-		Object.assign(betData, betDataDefaults);
-	};
+	// const $init = function $init () {
+	// 	// if no localStorage, use defaults...
+	// 	// ============================================
+	// 	// TODO!!! (CURRENTLY ALWAYS USING DEFAULTS)
+	// 	// ============================================
+	// 	Object.assign(betData, betDataDefaults);
+	// };
+	//
+	// $init();
 
-	$init();
-
-	const $set = function $set (martingaleData) {
+	// const $set = function $set (martingaleData) {
+	const $set = function $set () {
 		const data = dataService().get();
 		console.log("dataService data:", data);
 		const settings = settingsService().get();
 
 		// get data from the relevant martingale iteration...
 		var martingaleBet = data.martingaleBets[data.martingaleIterationSlot];
-		//var data = martingaleData[_Zoobinary.data.martingaleIterationSlot];
 
-		// =================================================
-		// TODO: use Floats or Ceils based on settings
-		// =================================================
-		
 		console.log(`martingaleBet for iteration ${data.martingaleIterationSlot}:`, martingaleBet);
 
+		// =================================================
+		// IMPORTANT: use Floats or Ceils based on settings
+		// =================================================
+		const numberType = settings.roundUpBets? "Ceil" : "Float";
+		const betDataProps = {
+			currency: `currency${numberType}`,
+			currencyReturnNet: `currency${numberType}ReturnNet`,
+			currencyTotal: `currency${numberType}Total`,
+			percentReturnNet: `percent${numberType}ReturnNet`,
+			percentTotal: `percent${numberType}Total`
+		};
 		const viewObj = {
 			header: {
 				capital: `£${settings.capital}`,
 				brokerRtn: `Broker: ${parseInt(settings.brokerReturn * 100)}%`
-				
 			},
 			bet: {
-				currency: `£${martingaleBet.currencyCeil}`,
-				win: `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`,
-				lose: `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`,
+				// currency: `£${martingaleBet.currencyCeil}`,
+				// win: `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`,
+				// lose: `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`,
+				currency: `£${martingaleBet[betDataProps.currency]}`,
+				win: `£${martingaleBet[betDataProps.currencyReturnNet]} / ${martingaleBet[betDataProps.percentReturnNet]}%`,
+				lose: `£${martingaleBet[betDataProps.currencyTotal]} / ${martingaleBet[betDataProps.percentTotal]}%`,
 				martingales: settings.martingales,
 				martingaleIterationNumber: data.martingaleIterationNumber
-			}	
+			}
 		}
 		// viewObj.header.capital = `£${settings.capital}`;
 		// viewObj.header.brokerReturn = `Broker: ${parseInt(settings.brokerReturn * 100)}%`;
-		// viewObj.bet.currency = `£${martingaleBet.currencyCeil}`; 
+		// viewObj.bet.currency = `£${martingaleBet.currencyCeil}`;
 		// viewObj.bet.win = `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`;
-		// viewObj.bet.lose = `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`;		
+		// viewObj.bet.lose = `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`;
 		// viewObj.bet.martingales = settings.martingales;
 		// viewObj.bet.martingaleIterationNumber = data.martingaleIterationNumber;
 

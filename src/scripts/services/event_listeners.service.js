@@ -8,9 +8,28 @@ import * as ctrls from "./ctrls.service";
 import {settingsService} from "./settings.service";
 import {martingaleService} from "./martingale.service";
 import {betDataService} from "./bet_data.service";
+import {dataService} from "./data.service";
 
 export const eventListenersService = (function eventListenersService () {
 	const $set = () => {
+
+		// =================================================================
+		// TODO - REPLACE THIS WITH ARROW CONTROLS AND / OR SWIPE CONTROL
+		// =================================================================
+		dom.main__martingaleCounters.addEventListener("click", function (e) {
+			const clientX = e.clientX - this.offsetLeft;
+			const counterType = clientX >= (this.offsetWidth / 2)? "add" : "subtract";
+			const data = dataService().get();
+			let martingaleIterationSlot = counterType == "add"? data.martingaleIterationSlot + 1 : data.martingaleIterationSlot - 1;
+			if (martingaleIterationSlot >= data.martingaleBets.length || martingaleIterationSlot < 0) {
+				return console.warn(`data.martingaleBets[${martingaleIterationSlot}] is undefined`);
+			}
+			dataService().set({
+				martingaleIterationSlot: martingaleIterationSlot
+			});
+			betDataService().set();
+		});
+
 		dom.ctrl__menu__toggle.addEventListener("click", function () {
 			ctrls.settings__toggle();
 		});
@@ -38,9 +57,11 @@ export const eventListenersService = (function eventListenersService () {
 				// update settings...
 				settingsService().set(formData);
 				// update martingale data...
-				martingaleService().getStackedMartingales().then( (martingaleData) => {
-					betDataService().set(martingaleData);
-				});
+				martingaleService().update();
+				// martingaleService().getStackedMartingales().then( (martingaleData) => {
+				// 	// betDataService().set(martingaleData);
+				// 	betDataService().set();
+				// });
 			});
 		}
 	};

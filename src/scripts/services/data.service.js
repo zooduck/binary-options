@@ -19,8 +19,9 @@ export const dataService = (function dataService () {
 	const $set = function $set (data = {}) {
 		for (let key in data) {
 			let val = data[key];
-			if (val) zoobinary.data[key] = val;
+			if (val === 0 || val) zoobinary.data[key] = val;
 		}
+		zoobinary.data.martingaleIterationNumber = zoobinary.data.martingaleIterationSlot + 1;
 		console.log("zoobinary updated:", zoobinary);
 	};
 

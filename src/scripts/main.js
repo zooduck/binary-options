@@ -47,9 +47,10 @@ import {eventListenersService} from "./services/event_listeners.service";
 
 eventListenersService().set();
 
-martingaleService().getStackedMartingales().then( (martingaleData) => {
-	betDataService().set(martingaleData);
-});
+martingaleService().update();
+// martingaleService().getStackedMartingales().then( (martingaleData) => {
+// 	betDataService().set(martingaleData);
+// });
 
 
 

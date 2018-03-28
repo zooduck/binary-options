@@ -4,11 +4,13 @@ import {genericService} from "./generic.service";
 // import {_Zoobinary} from "../global/zoobinary";
 import {settingsService} from "./settings.service";
 import {dataService} from "./data.service";
+import {betDataService} from "./bet_data.service";
 
 export const martingaleService = (function () {
 
 	// const config = configService().get();
 	const settings = settingsService().get();
+	const data = dataService().get();
 
 	console.log("settings:", settings);
 
@@ -105,63 +107,120 @@ export const martingaleService = (function () {
 		});
 
 		console.table(martingaleBets);
-		dataService().set({martingaleBets: martingaleBets});
+		dataService().set({
+			martingaleBets: martingaleBets,
+			martingaleIterationSlot: data.martingaleIterationSlot}
+		);
 		//_Zoobinary.data.martingaleBets = betsData;
 		return martingaleBets;
+	};
+
+	const $getStackedMartingales = function $getStackedMartingales () {
+
+		// ------------------------------------------------------------------
+		// we must return a Promise because using setInterval for the loop!
+		// ------------------------------------------------------------------
+		return new Promise ( (resolve, reject) => {
+
+			let singleBet = 1;
+			let betAdjustFactor = 3;
+			let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)
+			let aboveTarget = null;
+			let efficiencyLoopCount = 0;
+			const targetMax = 100;
+			const targetMin = 99;
+
+			const calcBetsInterval = setInterval(function(){
+				let bets = $calcBets(singleBet);
+
+				let totalBets = bets.reduce(genericService().arraySum);
+				if (totalBets <= targetMax && totalBets >= targetMin) {
+					clearInterval(calcBetsInterval);
+					console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
+					console.table(settings);
+					resolve($martingaleData(bets));
+					// return $martingaleData(bets);
+				}
+				if (totalBets > targetMax) {
+					// reduce the singleBet
+					if (aboveTarget === false) {
+						betAdjust = betAdjust / betAdjustFactor;
+					}
+					aboveTarget = true;
+					singleBet = singleBet - betAdjust;
+
+				}
+				if (totalBets < targetMax) {
+					// increase the singleBet
+					if (aboveTarget === true) {
+						betAdjust = betAdjust / betAdjustFactor;
+					}
+					aboveTarget = false;
+					singleBet = singleBet + betAdjust;
+				}
+				efficiencyLoopCount++;
+			}, 0);
+
+		});
 	};
 
 
 	return function () {
 
 		return {
-			getStackedMartingales: function getStackedMartingales () {
-
-				// ------------------------------------------------------------------
-				// we must return a Promise because using setInterval for the loop!
-				// ------------------------------------------------------------------
-				return new Promise ( (resolve, reject) => {
-
-					let singleBet = 1;
-					let betAdjustFactor = 3;
-					let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)
-					let aboveTarget = null;
-					let efficiencyLoopCount = 0;
-					const targetMax = 100;
-					const targetMin = 99;
-
-					const calcBetsInterval = setInterval(function(){
-						let bets = $calcBets(singleBet);
-
-						let totalBets = bets.reduce(genericService().arraySum);
-						if (totalBets <= targetMax && totalBets >= targetMin) {
-							clearInterval(calcBetsInterval);
-							console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
-							console.table(settings);
-							resolve($martingaleData(bets));
-							// return $martingaleData(bets);
-						}
-						if (totalBets > targetMax) {
-							// reduce the singleBet
-							if (aboveTarget === false) {
-								betAdjust = betAdjust / betAdjustFactor;
-							}
-							aboveTarget = true;
-							singleBet = singleBet - betAdjust;
-
-						}
-						if (totalBets < targetMax) {
-							// increase the singleBet
-							if (aboveTarget === true) {
-								betAdjust = betAdjust / betAdjustFactor;
-							}
-							aboveTarget = false;
-							singleBet = singleBet + betAdjust;
-						}
-						efficiencyLoopCount++;
-					}, 0);
-
+			update() {
+				$getStackedMartingales().then( () => {
+					betDataService().set();
 				});
 			}
+			// getStackedMartingales: function getStackedMartingales () {
+			//
+			// 	// ------------------------------------------------------------------
+			// 	// we must return a Promise because using setInterval for the loop!
+			// 	// ------------------------------------------------------------------
+			// 	return new Promise ( (resolve, reject) => {
+			//
+			// 		let singleBet = 1;
+			// 		let betAdjustFactor = 3;
+			// 		let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)
+			// 		let aboveTarget = null;
+			// 		let efficiencyLoopCount = 0;
+			// 		const targetMax = 100;
+			// 		const targetMin = 99;
+			//
+			// 		const calcBetsInterval = setInterval(function(){
+			// 			let bets = $calcBets(singleBet);
+			//
+			// 			let totalBets = bets.reduce(genericService().arraySum);
+			// 			if (totalBets <= targetMax && totalBets >= targetMin) {
+			// 				clearInterval(calcBetsInterval);
+			// 				console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
+			// 				console.table(settings);
+			// 				resolve($martingaleData(bets));
+			// 				// return $martingaleData(bets);
+			// 			}
+			// 			if (totalBets > targetMax) {
+			// 				// reduce the singleBet
+			// 				if (aboveTarget === false) {
+			// 					betAdjust = betAdjust / betAdjustFactor;
+			// 				}
+			// 				aboveTarget = true;
+			// 				singleBet = singleBet - betAdjust;
+			//
+			// 			}
+			// 			if (totalBets < targetMax) {
+			// 				// increase the singleBet
+			// 				if (aboveTarget === true) {
+			// 					betAdjust = betAdjust / betAdjustFactor;
+			// 				}
+			// 				aboveTarget = false;
+			// 				singleBet = singleBet + betAdjust;
+			// 			}
+			// 			efficiencyLoopCount++;
+			// 		}, 0);
+			//
+			// 	});
+			// }
 		}
 	}
 })();
