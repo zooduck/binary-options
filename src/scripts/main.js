@@ -6,23 +6,12 @@ import * as dom from "./services/dom.service";
 // Services...
 import {testService} from "./services/test_service";
 // import {configService} from "./services/config.service";
-
 import {martingaleService} from "./services/martingale.service";
 import {betDataService} from "./services/bet_data.service";
-
 import {viewBinderService} from "./services/view_binder.service";
-
-// ============================================================================
-// TODO: SEEMS WRONG THAT WE NEED TO INIT THESE HERE, THINK OF A BETTER WAY!
-// ============================================================================
 import {viewDataService} from "./services/view_data.service";
-viewDataService();
 import {settingsService} from "./services/settings.service";
-settingsService();
 import {dataService} from "./services/data.service";
-dataService();
-
-
 
 // Event Listeners (FOR TESTING ONLY)...
 
@@ -59,7 +48,7 @@ import {eventListenersService} from "./services/event_listeners.service";
 eventListenersService().set();
 
 martingaleService().getStackedMartingales().then( (martingaleData) => {
-	betDataService().set(martingaleData);	
+	betDataService().set(martingaleData);
 });
 
 
@@ -126,14 +115,3 @@ testService().exposedMethod();
 // 	// update martingale data...
 // 	martingaleService().getStackedMartingales();
 // });
-
-
-
-
-
-
-
-
-
-
-

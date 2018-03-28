@@ -1,14 +1,14 @@
 import {zoobinary} from "../global/zoobinary";
 
 export const settingsService = (function settingsService () {
-	
-	const $init = () => {		
+
+	const $init = () => {
 		zoobinary.settings = {
 			capital: 10.00,
 			brokerReturn: 0.85,
 			martingales: 5,
 			open: 10.00,
-			roundUpBets: true
+			roundUpBets: false
 		}
 	}
 
@@ -30,7 +30,7 @@ export const settingsService = (function settingsService () {
 			if (typeof val != types[key]) {
 				console.error(`Invalid type! Expected ${types[key]} but got ${typeof val}.`);
 				return;
-			} else if (val) zoobinary.settings[key] = val;					
+			} else if (val) zoobinary.settings[key] = val;
 		}
 		console.log("zoobinary updated:", zoobinary);
 	};
@@ -42,9 +42,9 @@ export const settingsService = (function settingsService () {
 			let val = pair[1];
 			let data = {}
 			if (val) {
-				data[key] = val;			
+				data[key] = val;
 				$set(data);
-			}		
+			}
 		}
 	};
 
@@ -59,7 +59,7 @@ export const settingsService = (function settingsService () {
 				}
 				return $set(data);
 			},
-			get: (key = null) => {				
+			get: (key = null) => {
 				if (typeof key === "string" && zoobinary.settings[key]) {
 					return zoobinary.settings[key];
 				} else return zoobinary.settings;

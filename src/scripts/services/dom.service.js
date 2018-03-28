@@ -15,3 +15,6 @@ export const settings__advanced = document.querySelector("#settings__advanced");
 export const ctrl__settings__advanced__toggle = document.querySelector("#ctrl__settings__advanced__toggle");
 export const settings__martingalesDetail = document.querySelector("#settings__martingalesDetail");
 export const ctrl__settings__martingalesDetail__toggle = document.querySelector("#ctrl__settings__martingalesDetail__toggle");
+export const ctrl__settings__basic__capital = document.querySelector("#ctrl__settings__basic__capital");
+export const ctrl__settings__basic__brokerReturn = document.querySelector("#ctrl__settings__basic__brokerReturn");
+export const ctrl__settings__basic__martingales = document.querySelector("#ctrl__settings__basic__martingales");

@@ -52,10 +52,13 @@
 
             <div class="subpanel-B">
 
-                <div class="subpanel-C">
-                    <i class="ctrl material-icons md-36 md-light" id="ctrl__menu__toggle">menu</i>
+                <div class="subpanel-C light">
+                    <i class="ctrl material-icons md-36 md-dark" id="ctrl__menu__toggle">person_outline</i>
                     <span class="item title">ZOOBINARY</span>
-                    <span class="item capital" data-bind="view.header.capital"></span>
+                    <div class="item capital">
+                      <i class="material-icons md-36 md-dark">account_balance</i>
+                      <span data-bind="view.header.capital"></span>
+                    </div>
                 </div>
 
                 <div class="subpanel-D">
@@ -118,54 +121,60 @@
         <!-- /\/\/\/\ -->
 
         <div class="zoobinary__panel__settings" id="settings">
-            <div class="subpanel-A" style="display: none">
+            <div class="subpanel-A">
                 <div class="header">
                     <span class="title">SETTINGS</span>
-                     <i class="ctrl material-icons md-light" id="ctrl__settings__toggle">close</i>
+                    <button type="button" id="ctrl__settings__toggle">
+                      <i class="ctrl material-icons md-light" >close</i>
+                    </button>
                 </div>
             </div>
             <div class="subpanel-B">
                 <div class="header">
                     <span class="title">BASIC</span>
-                    <i class="ctrl material-icons md-light" id="ctrl__settings__basic__toggle">expand_more</i>
+                    <button type="button" id="ctrl__settings__basic__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
                 </div>
                 <div class="items active" id="settings__basic">
-                    <div class="item">
-                        <label for="capital__SET">Capital</label>
+                    <form class="item">
+                        <label for="ctrl__settings__basic__capital">Capital</label>
                         <span class="desc">Your current balance</span>
                         <input
                             type="text"
                             name="capital"
-                            id="capital__SET"
+                            id="ctrl__settings__basic__capital"
                             placeholder="1985.19"
                             data-bind="settings.capital">
-                    </div>
-                    <div class="item">
-                        <label for="brokerReturn__SET">Broker Return</label>
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__basic__brokerReturn">Broker Return</label>
                         <span class="desc">The amount of return (as a percentage) that your broker will payout for a successful bet.</span>
                         <input
                             type="text"
                             name="brokerReturn"
-                            id="brokerReturn__SET"
+                            id="ctrl__settings__basic__brokerReturn"
                             placeholder="0.85"
                             data-bind="settings.brokerReturn">
-                    </div>
-                    <div class="item">
-                        <label for="martingales__SET">Martingales</label>
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__basic__martingales">Martingales</label>
                         <span class="desc">The maximum number of martingales (failed bets) that you want to accomodate. Higher values = lower risk, lower payout. Lower values = Higher risk, Higher payout.</span>
                         <input
                             type="text"
                             name="martingales"
-                            id="martingales__SET"
+                            id="ctrl__settings__basic__martingales"
                             placeholder="5"
                             data-bind="settings.martingales">
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="subpanel-C">
                  <div class="header">
                     <span class="title">ADVANCED</span>
-                    <i class="ctrl material-icons md-light" id="ctrl__settings__advanced__toggle">expand_more</i>
+                    <button type="button" id="ctrl__settings__advanced__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
                 </div>
                 <div class="items" id="settings__advanced">
                     <div class="item">
@@ -188,17 +197,26 @@
             <div class="subpanel-D">
                 <div class="header">
                     <span class="title">MARTINGALES DETAIL</span>
-                    <i class="ctrl material-icons md-light" id="ctrl__settings__martingalesDetail__toggle">expand_more</i>
+                    <button type="button" id="ctrl__settings__martingalesDetail__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
                 </div>
                  <div class="items active" id="settings__martingalesDetail">
                     <div class="item" data-template="data.martingaleBets" data-template-item="bet">
+                        <div>
+                          <span>Bet:</span>
+                          <span data-template-bind="bet.index + 1">
+                        </div>
                         <span>currencyFloat:</span>
                         <span data-template-bind="bet.currencyFloat"></span>
-                        <span data-template-bind="bet.currencyCeil"></span>
-                        <span data-template-bind="bet"></span>
+                        <span>currencyFloatReturnNet:</span>
+                        <span data-template-bind="bet.currencyFloatReturnNet"></span>
+                        <span>percentFloatTotal:</span>
+                        <span data-template-bind="bet.percentFloatTotal"></span>
                     </div>
                  </div>
             </div>
+            <div class="footer"></div>
         </div><!-- // zoobinary__panel__settings -->
 
 
@@ -220,7 +238,7 @@
 
 
 
-        <div class="zoobinary__settings-container">
+        <div class="zoobinary__settings-container" style="display: none;">
             <div class="zoobinary__settings-container__setting">
                 <form class="zoobinary__settings-container__form" id="zoobinaryForm_setCapital">
                     <label for="zoobinaryFormInput_capital">CAPITAL</label>

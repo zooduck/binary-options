@@ -6,7 +6,7 @@ import {settingsService} from "./settings.service";
 import {dataService} from "./data.service";
 
 export const martingaleService = (function () {
-	
+
 	// const config = configService().get();
 	const settings = settingsService().get();
 
@@ -18,20 +18,20 @@ export const martingaleService = (function () {
 	}
 
 	const $calcBet = (combinedBets, martingaleIteration, singleBet) => {
-		
+
 		let cover = combinedBets / settings.brokerReturn;
 		let nextBet = singleBet * martingaleIteration;
-		return cover + nextBet;		
+		return cover + nextBet;
 	};
 
 	const $calcBets = (singleBet = 1) => {
 		let combinedBets = 0;
 		let bets = [];
 		let martingaleIteration = 1;
-		for (let n = 0, l = settings.martingales; n < l; n++) {			
+		for (let n = 0, l = settings.martingales; n < l; n++) {
 			// console.log("martingaleIteration", martingaleIteration);
 			let bet = $calcBet(combinedBets, martingaleIteration, singleBet);
-			bets.push(bet);		
+			bets.push(bet);
 			combinedBets = bets.reduce(genericService().arraySum);
 			martingaleIteration++;
 		}
@@ -74,21 +74,22 @@ export const martingaleService = (function () {
 			let percentFloatReturnNet = percentFloatReturnGross;
 			let percentCeilReturnGross = percentCeil * settings.brokerReturn;
 			let percentCeilReturnNet = percentCeilReturnGross;
-			
+
 			if (martingaleBets[index-1]) {
 				// subtract previous total from gross...
 				currencyFloatReturnNet = currencyFloatReturnGross - martingaleBets[index-1].currencyFloatTotal;
 				currencyCeilReturnNet = currencyCeilReturnGross - martingaleBets[index-1].currencyCeilTotal;
 				percentFloatReturnNet = percentFloatReturnGross - martingaleBets[index-1].percentFloatTotal;
 				percentCeilReturnNet = percentCeilReturnGross - martingaleBets[index-1].percentCeilTotal;
-			}			
+			}
 
 			martingaleBets.push({
+				index: index,
 				currencyFloat: $float(currencyFloat),
 				currencyFloatTotal: $float(currencyFloatTotal),
 				currencyFloatReturnGross: $float(currencyFloatReturnGross),
 				currencyFloatReturnNet: $float(currencyFloatReturnNet),
-				currencyCeil: $float(currencyCeil),				
+				currencyCeil: $float(currencyCeil),
 				currencyCeilTotal: $float(currencyCeilTotal),
 				currencyCeilReturnGross: $float(currencyCeilReturnGross),
 				currencyCeilReturnNet: $float(currencyCeilReturnNet),
@@ -96,33 +97,33 @@ export const martingaleService = (function () {
 				percentFloatTotal: $float(percentFloatTotal),
 				percentFloatReturnGross: $float(percentFloatReturnGross),
 				percentFloatReturnNet: $float(percentFloatReturnNet),
-				percentCeil: $float(percentCeil),				
+				percentCeil: $float(percentCeil),
 				percentCeilTotal: $float(percentCeilTotal),
 				percentCeilReturnGross: $float(percentCeilReturnGross),
-				percentCeilReturnNet: $float(percentCeilReturnNet)		
+				percentCeilReturnNet: $float(percentCeilReturnNet)
 			});
 		});
 
 		console.table(martingaleBets);
 		dataService().set({martingaleBets: martingaleBets});
-		//_Zoobinary.data.martingaleBets = betsData;		
+		//_Zoobinary.data.martingaleBets = betsData;
 		return martingaleBets;
 	};
 
 
 	return function () {
-		
+
 		return {
-			getStackedMartingales: function getStackedMartingales () {		
+			getStackedMartingales: function getStackedMartingales () {
 
 				// ------------------------------------------------------------------
 				// we must return a Promise because using setInterval for the loop!
 				// ------------------------------------------------------------------
 				return new Promise ( (resolve, reject) => {
-					
+
 					let singleBet = 1;
-					let betAdjustFactor = 3;			
-					let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)			
+					let betAdjustFactor = 3;
+					let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)
 					let aboveTarget = null;
 					let efficiencyLoopCount = 0;
 					const targetMax = 100;
@@ -131,18 +132,18 @@ export const martingaleService = (function () {
 					const calcBetsInterval = setInterval(function(){
 						let bets = $calcBets(singleBet);
 
-						let totalBets = bets.reduce(genericService().arraySum);				
+						let totalBets = bets.reduce(genericService().arraySum);
 						if (totalBets <= targetMax && totalBets >= targetMin) {
 							clearInterval(calcBetsInterval);
 							console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
-							console.table(settings);							
+							console.table(settings);
 							resolve($martingaleData(bets));
 							// return $martingaleData(bets);
 						}
 						if (totalBets > targetMax) {
 							// reduce the singleBet
-							if (aboveTarget === false) {							
-								betAdjust = betAdjust / betAdjustFactor;							
+							if (aboveTarget === false) {
+								betAdjust = betAdjust / betAdjustFactor;
 							}
 							aboveTarget = true;
 							singleBet = singleBet - betAdjust;
@@ -151,12 +152,12 @@ export const martingaleService = (function () {
 						if (totalBets < targetMax) {
 							// increase the singleBet
 							if (aboveTarget === true) {
-								betAdjust = betAdjust / betAdjustFactor;											
+								betAdjust = betAdjust / betAdjustFactor;
 							}
-							aboveTarget = false;						
+							aboveTarget = false;
 							singleBet = singleBet + betAdjust;
 						}
-						efficiencyLoopCount++;					
+						efficiencyLoopCount++;
 					}, 0);
 
 				});
