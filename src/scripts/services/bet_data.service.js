@@ -43,7 +43,8 @@ export const betDataService = (function () {
 		const viewObj = {
 			header: {
 				capital: `£${settings.capital}`,
-				brokerRtn: `Broker: ${parseInt(settings.brokerReturn * 100)}%`
+				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
+				martingales: settings.martingales
 			},
 			bet: {
 				// currency: `£${martingaleBet.currencyCeil}`,
