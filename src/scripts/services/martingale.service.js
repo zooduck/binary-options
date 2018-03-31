@@ -10,14 +10,14 @@ export const martingaleService = (function () {
 
 	// const config = configService().get();
 	const settings = settingsService().get();
-	const data = dataService().get();
+	// const data = dataService().get();
 
 	console.log("settings:", settings);
 
-	if (Object.keys(settings).length < 1) {
-		console.error("settings.service was not imported before martingale.service");
-		return;
-	}
+	// if (Object.keys(settings).length < 1) {
+	// 	console.error("settings.service was not imported before martingale.service");
+	// 	return;
+	// }
 
 	const $calcBet = (combinedBets, martingaleIteration, singleBet) => {
 
@@ -107,10 +107,12 @@ export const martingaleService = (function () {
 		});
 
 		console.table(martingaleBets);
-		dataService().set({
-			martingaleBets: martingaleBets,
-			martingaleIterationSlot: data.martingaleIterationSlot >= martingaleBets.length? 0 : data.martingaleIterationSlot
-		});
+
+		// dataService().set({
+		// 	martingaleBets: martingaleBets,
+		// 	martingaleIterationSlot: data.martingaleIterationSlot >= martingaleBets.length? 0 : data.martingaleIterationSlot
+		// });
+
 		//_Zoobinary.data.martingaleBets = betsData;
 		return martingaleBets;
 	};
@@ -169,9 +171,16 @@ export const martingaleService = (function () {
 
 		return {
 			update() {
-				$getStackedMartingales().then( () => {
-					betDataService().set();
-				});
+				// $getStackedMartingales().then( () => {
+				// 	betDataService().set();
+				// });
+				$getStackedMartingales().then ( (martingaleBets) => {
+					const data = dataService().get();
+					dataService().set({
+						martingaleBets: martingaleBets,
+						martingaleIterationSlot: data.martingaleIterationSlot >= martingaleBets.length? 0 : data.martingaleIterationSlot
+					});
+				})
 			}
 			// getStackedMartingales: function getStackedMartingales () {
 			//

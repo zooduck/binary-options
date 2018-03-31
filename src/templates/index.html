@@ -53,7 +53,7 @@
             <div class="subpanel-B">
 
                 <div class="subpanel-C light">
-                    <i class="ctrl material-icons md-36 md-dark" id="ctrl__menu__toggle">person_outline</i>
+                    <i class="ctrl material-icons md-36 md-dark" id="ctrl__menu__toggle">perm_identity</i>
                     <span class="item title">ZOOBINARY</span>
                     <div class="item capital">
                       <i class="material-icons md-36 md-dark">account_balance</i>
@@ -90,7 +90,7 @@
                             <div data-bind="view.bet.currency"></div>
                         </div>
 
-                        <div class="item win">
+                        <div class="item win" id="main__infoBar__win">
                             <div>
                                 <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
                                 <span>WIN</span>
@@ -98,7 +98,7 @@
                             <div data-bind="view.bet.win"></div>
                         </div>
 
-                        <div class="item lose">
+                        <div class="item lose" id="main__infoBar__lose">
                             <div>
                                 <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
                                 <span>LOSE</span>
@@ -108,9 +108,23 @@
 
                     </div>
 
+                </div><!-- // subpanel-E -->
+
+                <div class="subpanel-H">
+                  <!-- <span>RISK</span> -->
+                  <span>
+                    <i class="material-icons md-48 md-light">warning</i>
+                  </span>
+                  <progress
+                    class="exposure"
+                    data-value="view.progressIndicator.value"
+                    data-pseudo-before="view.progressIndicator.percent"
+                    data-pseudo-after="view.progressIndicator.currency"
+                    max="100">
+                  </progress>
                 </div>
 
-            </div>
+            </div><!-- // subpanel-B -->
 
         </div><!-- // zoobinary__panel__main -->
 
@@ -129,6 +143,7 @@
                     </button>
                 </div>
             </div>
+            <!-- BASIC -->
             <div class="subpanel-B">
                 <div class="header">
                     <span class="title">BASIC</span>
@@ -145,7 +160,7 @@
                             name="capital"
                             id="ctrl__settings__basic__capital"
                             placeholder="1985.19"
-                            data-bind="settings.capital">
+                            data-value="settings.capital">
                     </form>
                     <form class="item">
                         <label for="ctrl__settings__basic__brokerReturn">Broker Return</label>
@@ -155,7 +170,7 @@
                             name="brokerReturn"
                             id="ctrl__settings__basic__brokerReturn"
                             placeholder="0.85"
-                            data-bind="settings.brokerReturn">
+                            data-value="settings.brokerReturn">
                     </form>
                     <form class="item">
                         <label for="ctrl__settings__basic__martingales">Martingales</label>
@@ -165,10 +180,11 @@
                             name="martingales"
                             id="ctrl__settings__basic__martingales"
                             placeholder="5"
-                            data-bind="settings.martingales">
+                            data-value="settings.martingales">
                     </form>
                 </div>
             </div>
+            <!-- ADVANCED -->
             <div class="subpanel-C">
                  <div class="header">
                     <span class="title">ADVANCED</span>
@@ -185,7 +201,7 @@
                             name="open"
                             id="open__SET"
                             placeholder="250.00"
-                            data-bind="settings.open">
+                            data-value="settings.open">
                     </div>
                     <div class="item">
                         <label for="roundUp__SET">Round-up bets</label>
@@ -194,6 +210,7 @@
                     </div>
                 </div>
             </div>
+            <!-- MARTINGALES DETAIL -->
             <div class="subpanel-D">
                 <div class="header">
                     <span class="title">MARTINGALES DETAIL</span>

@@ -41,6 +41,11 @@ export const betDataService = (function () {
 			percentTotal: `percent${numberType}Total`
 		};
 		const viewObj = {
+			progressIndicator: {
+				value: martingaleBet[betDataProps.percentTotal],
+				percent: `${martingaleBet[betDataProps.percentTotal]}%`,
+				currency: `£${martingaleBet[betDataProps.currencyTotal]}`
+			},
 			header: {
 				capital: `£${settings.capital}`,
 				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
@@ -51,8 +56,8 @@ export const betDataService = (function () {
 				// win: `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`,
 				// lose: `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`,
 				currency: `£${martingaleBet[betDataProps.currency]}`,
-				win: `£${martingaleBet[betDataProps.currencyReturnNet]} / ${martingaleBet[betDataProps.percentReturnNet]}%`,
-				lose: `£${martingaleBet[betDataProps.currencyTotal]} / ${martingaleBet[betDataProps.percentTotal]}%`,
+				win: `${martingaleBet[betDataProps.percentReturnNet]}% / £${martingaleBet[betDataProps.currencyReturnNet]}`,
+				lose: `${martingaleBet[betDataProps.percentTotal]}% / £${martingaleBet[betDataProps.currencyTotal]}`,
 				martingales: settings.martingales,
 				martingaleIterationNumber: data.martingaleIterationNumber
 			}

@@ -16,18 +16,33 @@ export const eventListenersService = (function eventListenersService () {
 		// =================================================================
 		// TODO - REPLACE THIS WITH ARROW CONTROLS AND / OR SWIPE CONTROL
 		// =================================================================
-		dom.main__martingaleCounters.addEventListener("click", function (e) {
-			const clientX = e.clientX - this.offsetLeft;
-			const counterType = clientX >= (this.offsetWidth / 2)? "add" : "subtract";
+		// dom.main__martingaleCounters.addEventListener("click", function (e) {
+		// 	const clientX = e.clientX - this.offsetLeft;
+		// 	const counterType = clientX >= (this.offsetWidth / 2)? "add" : "subtract";
+		// 	const data = dataService().get();
+		// 	let martingaleIterationSlot = counterType == "add"? data.martingaleIterationSlot + 1 : data.martingaleIterationSlot - 1;
+		// 	if (martingaleIterationSlot >= data.martingaleBets.length || martingaleIterationSlot < 0) {
+		// 		return console.warn(`data.martingaleBets[${martingaleIterationSlot}] is undefined`);
+		// 	}
+		// 	dataService().set({
+		// 		martingaleIterationSlot: martingaleIterationSlot
+		// 	});
+		// 	// betDataService().set();
+		// });
+		dom.main__infoBar__win.addEventListener("click", function (e) {
+			dataService().set({
+				martingaleIterationSlot: 0
+			});
+		});
+		dom.main__infoBar__lose.addEventListener("click", function (e) {
 			const data = dataService().get();
-			let martingaleIterationSlot = counterType == "add"? data.martingaleIterationSlot + 1 : data.martingaleIterationSlot - 1;
-			if (martingaleIterationSlot >= data.martingaleBets.length || martingaleIterationSlot < 0) {
+			let martingaleIterationSlot = data.martingaleIterationSlot + 1;
+			if (martingaleIterationSlot >= data.martingaleBets.length) {
 				return console.warn(`data.martingaleBets[${martingaleIterationSlot}] is undefined`);
 			}
 			dataService().set({
 				martingaleIterationSlot: martingaleIterationSlot
 			});
-			betDataService().set();
 		});
 
 		dom.ctrl__menu__toggle.addEventListener("click", function () {
