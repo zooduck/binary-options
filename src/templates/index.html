@@ -90,21 +90,27 @@
                             <div data-bind="view.bet.currency"></div>
                         </div>
 
-                        <div class="item win" id="main__infoBar__win">
-                            <div>
-                                <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
-                                <span>WIN</span>
-                            </div>
-                            <div data-bind="view.bet.win"></div>
-                        </div>
+                        <label>
+                          <input type="radio" name="betStatus">
+                          <div class="item win" id="main__infoBar__win">
+                              <div>
+                                  <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
+                                  <span>WIN</span>
+                              </div>
+                              <div data-bind="view.bet.win"></div>
+                          </div>
+                        </label>
 
-                        <div class="item lose" id="main__infoBar__lose">
-                            <div>
-                                <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
-                                <span>LOSE</span>
-                            </div>
-                            <div data-bind="view.bet.lose"></div>
-                        </div>
+                        <label>
+                          <input type="radio" name="betStatus">
+                          <div class="item lose" id="main__infoBar__lose">
+                              <div>
+                                  <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                                  <span>LOSE</span>
+                              </div>
+                              <div data-bind="view.bet.lose"></div>
+                          </div>
+                        </label>
 
                     </div>
 

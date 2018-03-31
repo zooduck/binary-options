@@ -144,7 +144,10 @@ body#zoobinary {
 	border: solid #fff;
 	margin-bottom: 10px;
 }
-.zoobinary__panel__main .subpanel-G .item.win:hover, .zoobinary__panel__main .subpanel-G .item.lose:hover {
+.zoobinary__panel__main .subpanel-G input[type=radio] {
+	display: none;
+}
+.zoobinary__panel__main .subpanel-G input[type=radio]:checked ~ .item {
 	cursor: pointer;
 	background: rgba(255, 255, 255, .2);
 	color: rgba(0, 0, 0, .53);
@@ -153,6 +156,15 @@ body#zoobinary {
 	}
 	// box-shadow: 0 2px 5px rgba(0, 0, 0, .25) inset;
 }
+// .zoobinary__panel__main .subpanel-G .item.win:hover, .zoobinary__panel__main .subpanel-G .item.lose:hover {
+// 	cursor: pointer;
+// 	background: rgba(255, 255, 255, .2);
+// 	color: rgba(0, 0, 0, .53);
+// 	i {
+// 		color: rgba(0, 0, 0, .53);
+// 	}
+// 	// box-shadow: 0 2px 5px rgba(0, 0, 0, .25) inset;
+// }
 .zoobinary__panel__main .subpanel-H {
 	display: flex;
 	margin-left: 20px;
