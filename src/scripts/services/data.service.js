@@ -1,10 +1,12 @@
 import {zoobinary} from "../global/zoobinary";
 import {betDataService} from "./bet_data.service";
+import {settingsService} from "./settings.service";
 
 export const dataService = (function dataService () {
 
 	const $init = () => {
 		zoobinary.data = {
+			currentBalance: settingsService().get().capital,
 			martingaleBets: [],
 			martingaleIterationSlot: 0,
 			martingaleIterationNumber: 1

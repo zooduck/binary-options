@@ -7,6 +7,7 @@ export const main = document.querySelector("#main");
 export const main__martingaleCounters = document.querySelector("#main__martingaleCounters");
 export const main__infoBar__win = document.querySelector("#main__infoBar__win");
 export const main__infoBar__lose = document.querySelector("#main__infoBar__lose");
+export const main__infoBar__exit = document.querySelector("#main__infoBar__exit");
 
 // SETTINGS
 export const settings = document.querySelector("#settings");

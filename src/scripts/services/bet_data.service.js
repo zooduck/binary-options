@@ -48,6 +48,7 @@ export const betDataService = (function () {
 			},
 			header: {
 				capital: `£${settings.capital}`,
+				currentBalance: `£${data.currentBalance}`,
 				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
 				martingales: settings.martingales
 			},

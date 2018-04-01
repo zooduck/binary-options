@@ -57,7 +57,7 @@
                     <span class="item title">ZOOBINARY</span>
                     <div class="item capital">
                       <i class="material-icons md-36 md-dark">account_balance</i>
-                      <span data-bind="view.header.capital"></span>
+                      <span data-bind="view.header.currentBalance"></span>
                     </div>
                 </div>
 
@@ -81,54 +81,59 @@
                     </div>
 
                     <div class="subpanel-G">
+                      <div class="item bet">
+                          <div>
+                              <i class="material-icons md-light md-48">stars</i>
+                              <span>BET</span>
+                          </div>
+                          <div data-bind="view.bet.currency"></div>
+                      </div>
 
-                        <div class="item bet">
+                      <label>
+                        <input type="radio" name="betStatus">
+                        <div class="item win" id="main__infoBar__win">
                             <div>
-                                <i class="material-icons md-light md-48">stars</i>
-                                <span>BET</span>
+                                <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
+                                <span>WIN</span>
                             </div>
-                            <div data-bind="view.bet.currency"></div>
+                            <div data-bind="view.bet.win"></div>
                         </div>
+                      </label>
 
-                        <label>
-                          <input type="radio" name="betStatus">
-                          <div class="item win" id="main__infoBar__win">
-                              <div>
-                                  <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
-                                  <span>WIN</span>
-                              </div>
-                              <div data-bind="view.bet.win"></div>
-                          </div>
-                        </label>
+                      <label>
+                        <input type="radio" name="betStatus">
+                        <div class="item lose" id="main__infoBar__lose">
+                            <div>
+                                <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                                <span>LOSE</span>
+                            </div>
+                            <div data-bind="view.bet.lose"></div>
+                        </div>
+                      </label>
 
-                        <label>
-                          <input type="radio" name="betStatus">
-                          <div class="item lose" id="main__infoBar__lose">
-                              <div>
-                                  <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
-                                  <span>LOSE</span>
-                              </div>
-                              <div data-bind="view.bet.lose"></div>
-                          </div>
-                        </label>
+                      <div class="item exit" id="main__infoBar__exit">
+                        <div>
+                          <i class="material-icons md-light md-48">content_cut</i>
+                          <span>EXIT POSITION</span>
+                        </div>
+                      </div>
 
-                    </div>
+                      <div class="item exposure">
+                        <!-- <span>
+                          <i class="material-icons md-48 md-light">warning</i>
+                        </span> -->
+                        <progress
+                          class="exposure"
+                          data-value="view.progressIndicator.value"
+                          data-pseudo-before="view.progressIndicator.percent"
+                          data-pseudo-after="view.progressIndicator.currency"
+                          max="100">
+                        </progress>
+                      </div>
+
+                    </div><!-- // subpanel-G -->
 
                 </div><!-- // subpanel-E -->
-
-                <div class="subpanel-H">
-                  <!-- <span>RISK</span> -->
-                  <span>
-                    <i class="material-icons md-48 md-light">warning</i>
-                  </span>
-                  <progress
-                    class="exposure"
-                    data-value="view.progressIndicator.value"
-                    data-pseudo-before="view.progressIndicator.percent"
-                    data-pseudo-after="view.progressIndicator.currency"
-                    max="100">
-                  </progress>
-                </div>
 
             </div><!-- // subpanel-B -->
 
@@ -200,14 +205,24 @@
                 </div>
                 <div class="items" id="settings__advanced">
                     <div class="item">
-                        <label for="open__SET">Open</label>
+                        <label for="ctrl__settings__advanced__open">Open</label>
                         <span class="desc">Set this to enable charts and stats</span>
                         <input
                             type="text"
                             name="open"
-                            id="open__SET"
+                            id="ctrl__settings__advanced__open"
                             placeholder="250.00"
                             data-value="settings.open">
+                    </div>
+                    <div class="item">
+                        <label for="ctrl__settings__advanced__targetPercent">Target %</label>
+                        <span class="desc">Set this in combination with Open to enable target progress in the view</span>
+                        <input
+                            type="text"
+                            name="targetPercent"
+                            id="ctrl__settings__advanced__targetPercent"
+                            placeholder="0.15"
+                            data-value="settings.targetPercent">
                     </div>
                     <div class="item">
                         <label for="roundUp__SET">Round-up bets</label>

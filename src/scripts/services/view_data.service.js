@@ -1,7 +1,7 @@
 import {zoobinary} from "../global/zoobinary";
 export const viewDataService = (function viewDataService () {
-	
-	const $init = () => {		
+
+	const $init = () => {
 		zoobinary.view = {
 			header: {},
 			bet: {},
@@ -16,7 +16,10 @@ export const viewDataService = (function viewDataService () {
 	};
 
 	const $set = (data) => {
-		zoobinary.view = data;
+		for (const key in data) {
+			zoobinary.view[key] = data[key];
+		}
+		// zoobinary.view = data;
 	};
 
 	const $setItem = (prop, val) => {
