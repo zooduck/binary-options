@@ -1,43 +1,21 @@
-// import {ctrl__settings__basic__toggle} from "./dom.service";
-// import {settings__basic__toggle} from "../ctrls/settings__basic__toggle.ctrl";
-// import {ctrl__settings__advanced__toggle} from "./dom.service";
-// import {settings__advanced__toggle} from "../ctrls/settings__advanced__toggle.ctrl";
-
 import * as dom from "./dom.service";
 import * as ctrls from "./ctrls.service";
 import {settingsService} from "./settings.service";
 import {martingaleService} from "./martingale.service";
 import {betDataService} from "./bet_data.service";
 import {dataService} from "./data.service";
-// import {viewDataService} from "./view_data.service";
-// import {viewBinderService} from "./view_binder.service";
 
 export const eventListenersService = (function eventListenersService () {
 	const $float = (int) => {
 		return new Number(int).toFixed(2);
 	};
 	const $set = () => {
-		// =================================================================
-		// TODO - REPLACE THIS WITH ARROW CONTROLS AND / OR SWIPE CONTROL
-		// =================================================================
-		// dom.main__martingaleCounters.addEventListener("click", function (e) {
-		// 	const clientX = e.clientX - this.offsetLeft;
-		// 	const counterType = clientX >= (this.offsetWidth / 2)? "add" : "subtract";
-		// 	const data = dataService().get();
-		// 	let martingaleIterationSlot = counterType == "add"? data.martingaleIterationSlot + 1 : data.martingaleIterationSlot - 1;
-		// 	if (martingaleIterationSlot >= data.martingaleBets.length || martingaleIterationSlot < 0) {
-		// 		return console.warn(`data.martingaleBets[${martingaleIterationSlot}] is undefined`);
-		// 	}
-		// 	dataService().set({
-		// 		martingaleIterationSlot: martingaleIterationSlot
-		// 	});
-		// 	// betDataService().set();
-		// });
 		dom.main__infoBar__win.addEventListener("click", function () {
 			const data = dataService().get();
 			const settings = settingsService().get();
 			const martingaleIterationSlot = data.martingaleIterationSlot;
-			const currentBalance = parseFloat(settings.capital) + parseFloat(data.martingaleBets[martingaleIterationSlot].currencyFloatReturnNet);
+			const numberType = settings.roundUpBets? "ceil" : "float";
+			const currentBalance = parseFloat(settings.capital) + parseFloat(data.martingaleBets[martingaleIterationSlot][numberType].currencyReturnNet);
 			settingsService().set({
 				capital: $float(currentBalance)
 			});
@@ -54,7 +32,8 @@ export const eventListenersService = (function eventListenersService () {
 			// if (martingaleIterationSlot > data.martingaleBets.length) { // THIS SHOULD NO LONGER BE POSSIBLE
 			// 	return console.warn(`data.martingaleBets[${martingaleIterationSlot}] is undefined`);
 			// }
-			const currentBalance = parseFloat(settings.capital) - parseFloat(data.martingaleBets[martingaleIterationSlot].currencyFloatTotal);
+			const numberType = settings.roundUpBets? "ceil" : "float";
+			const currentBalance = parseFloat(settings.capital) - parseFloat(data.martingaleBets[martingaleIterationSlot][numberType].currencyTotal);
 			if (martingaleIterationSlot == (data.martingaleBets.length - 1)) {
 				// ==========================================================
 				// process final loss and reset martingaleIterationSlot...
@@ -79,7 +58,8 @@ export const eventListenersService = (function eventListenersService () {
 			const settings = settingsService().get();
 			if (data.martingaleIterationSlot == 0) return;
 			let martingaleIterationSlot = data.martingaleIterationSlot - 1;
-			const currentBalance = parseFloat(settings.capital) - parseFloat(data.martingaleBets[martingaleIterationSlot].currencyFloatTotal);
+			const numberType = settings.roundUpBets? "ceil" : "float";
+			const currentBalance = parseFloat(settings.capital) - parseFloat(data.martingaleBets[martingaleIterationSlot][numberType].currencyTotal);
 			settingsService().set({
 				capital: $float(currentBalance)
 			});
@@ -117,10 +97,6 @@ export const eventListenersService = (function eventListenersService () {
 				settingsService().set(formData);
 				// update martingale data...
 				martingaleService().update();
-				// martingaleService().getStackedMartingales().then( (martingaleData) => {
-				// 	// betDataService().set(martingaleData);
-				// 	betDataService().set();
-				// });
 			});
 		}
 	};

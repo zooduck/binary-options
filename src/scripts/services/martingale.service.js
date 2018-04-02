@@ -55,7 +55,7 @@ export const martingaleService = (function () {
 		betsArr.forEach(function(betPercent, index) {
 			let percentFloat = betPercent;
 			percentFloatTotal += percentFloat;
-			console.log(percentFloat, percentFloatTotal);
+			// console.log(percentFloat, percentFloatTotal);
 			let currencyFloat = settings.capital * (betPercent / 100);
 			currencyFloatTotal += currencyFloat;
 			let currencyCeil = Math.ceil(currencyFloat);
@@ -63,10 +63,6 @@ export const martingaleService = (function () {
 
 			let percentCeil = currencyCeil / (settings.capital / 100);
 			percentCeilTotal += percentCeil;
-
-			//let percentCeil = Math.ceil(percentFloat);
-			//let percentCeilTotal = Math.ceil(percentFloatTotal);
-
 
 			let currencyFloatReturnGross = currencyFloat * settings.brokerReturn;
 			let currencyFloatReturnNet = currencyFloatReturnGross;
@@ -79,31 +75,56 @@ export const martingaleService = (function () {
 
 			if (martingaleBets[index-1]) {
 				// subtract previous total from gross...
-				currencyFloatReturnNet = currencyFloatReturnGross - martingaleBets[index-1].currencyFloatTotal;
-				currencyCeilReturnNet = currencyCeilReturnGross - martingaleBets[index-1].currencyCeilTotal;
-				percentFloatReturnNet = percentFloatReturnGross - martingaleBets[index-1].percentFloatTotal;
-				percentCeilReturnNet = percentCeilReturnGross - martingaleBets[index-1].percentCeilTotal;
+				currencyFloatReturnNet = currencyFloatReturnGross - martingaleBets[index-1].float.currencyTotal;
+				currencyCeilReturnNet = currencyCeilReturnGross - martingaleBets[index-1].ceil.currencyTotal;
+				percentFloatReturnNet = percentFloatReturnGross - martingaleBets[index-1].float.percentTotal;
+				percentCeilReturnNet = percentCeilReturnGross - martingaleBets[index-1].ceil.percentTotal;
 			}
+
+			// martingaleBets.push({
+			// 	index: index,
+			// 	currencyFloat: $float(currencyFloat),
+			// 	currencyFloatTotal: $float(currencyFloatTotal),
+			// 	currencyFloatReturnGross: $float(currencyFloatReturnGross),
+			// 	currencyFloatReturnNet: $float(currencyFloatReturnNet),
+			// 	currencyCeil: $float(currencyCeil),
+			// 	currencyCeilTotal: $float(currencyCeilTotal),
+			// 	currencyCeilReturnGross: $float(currencyCeilReturnGross),
+			// 	currencyCeilReturnNet: $float(currencyCeilReturnNet),
+			// 	percentFloat: $float(percentFloat),
+			// 	percentFloatTotal: $float(percentFloatTotal),
+			// 	percentFloatReturnGross: $float(percentFloatReturnGross),
+			// 	percentFloatReturnNet: $float(percentFloatReturnNet),
+			// 	percentCeil: $float(percentCeil),
+			// 	percentCeilTotal: $float(percentCeilTotal),
+			// 	percentCeilReturnGross: $float(percentCeilReturnGross),
+			// 	percentCeilReturnNet: $float(percentCeilReturnNet)
+			// });
 
 			martingaleBets.push({
 				index: index,
-				currencyFloat: $float(currencyFloat),
-				currencyFloatTotal: $float(currencyFloatTotal),
-				currencyFloatReturnGross: $float(currencyFloatReturnGross),
-				currencyFloatReturnNet: $float(currencyFloatReturnNet),
-				currencyCeil: $float(currencyCeil),
-				currencyCeilTotal: $float(currencyCeilTotal),
-				currencyCeilReturnGross: $float(currencyCeilReturnGross),
-				currencyCeilReturnNet: $float(currencyCeilReturnNet),
-				percentFloat: $float(percentFloat),
-				percentFloatTotal: $float(percentFloatTotal),
-				percentFloatReturnGross: $float(percentFloatReturnGross),
-				percentFloatReturnNet: $float(percentFloatReturnNet),
-				percentCeil: $float(percentCeil),
-				percentCeilTotal: $float(percentCeilTotal),
-				percentCeilReturnGross: $float(percentCeilReturnGross),
-				percentCeilReturnNet: $float(percentCeilReturnNet)
+				float: {
+					currency: $float(currencyFloat),
+					currencyTotal: $float(currencyFloatTotal),
+					currencyReturnGross: $float(currencyFloatReturnGross),
+					currencyReturnNet: $float(currencyFloatReturnNet),
+					percent: $float(percentFloat),
+					percentTotal: $float(percentFloatTotal),
+					percentReturnGross: $float(percentFloatReturnGross),
+					percentReturnNet: $float(percentFloatReturnNet),
+				},
+				ceil: {
+					currency: $float(currencyCeil),
+					currencyTotal: $float(currencyCeilTotal),
+					currencyReturnGross: $float(currencyCeilReturnGross),
+					currencyReturnNet: $float(currencyCeilReturnNet),
+					percent: $float(percentCeil),
+					percentTotal: $float(percentCeilTotal),
+					percentReturnGross: $float(percentCeilReturnGross),
+					percentReturnNet: $float(percentCeilReturnNet)
+				}
 			});
+
 		});
 
 		console.table(martingaleBets);

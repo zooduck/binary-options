@@ -1,4 +1,4 @@
-import {betDataDefaults} from "../_defaults/bet_data.defaults";
+// import {betDataDefaults} from "../_defaults/bet_data.defaults";
 import {viewBinderService} from "./view_binder.service";
 import {settingsService} from "./settings.service";
 import {dataService} from "./data.service";
@@ -32,19 +32,12 @@ export const betDataService = (function () {
 		// =================================================
 		// IMPORTANT: use Floats or Ceils based on settings
 		// =================================================
-		const numberType = settings.roundUpBets? "Ceil" : "Float";
-		const betDataProps = {
-			currency: `currency${numberType}`,
-			currencyReturnNet: `currency${numberType}ReturnNet`,
-			currencyTotal: `currency${numberType}Total`,
-			percentReturnNet: `percent${numberType}ReturnNet`,
-			percentTotal: `percent${numberType}Total`
-		};
+		const numberType = settings.roundUpBets? "ceil" : "float";
 		const viewObj = {
 			progressIndicator: {
-				value: martingaleBet[betDataProps.percentTotal],
-				percent: `${martingaleBet[betDataProps.percentTotal]}%`,
-				currency: `£${martingaleBet[betDataProps.currencyTotal]}`
+				value: martingaleBet[numberType].percentTotal,
+				percent: `${martingaleBet[numberType].percentTotal}%`,
+				currency: `£${martingaleBet[numberType].currencyTotal}`
 			},
 			header: {
 				capital: `£${settings.capital}`,
@@ -53,16 +46,47 @@ export const betDataService = (function () {
 				martingales: settings.martingales
 			},
 			bet: {
-				// currency: `£${martingaleBet.currencyCeil}`,
-				// win: `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`,
-				// lose: `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`,
-				currency: `£${martingaleBet[betDataProps.currency]}`,
-				win: `${martingaleBet[betDataProps.percentReturnNet]}% / £${martingaleBet[betDataProps.currencyReturnNet]}`,
-				lose: `${martingaleBet[betDataProps.percentTotal]}% / £${martingaleBet[betDataProps.currencyTotal]}`,
+				currency: `£${martingaleBet[numberType].currency}`,
+				win: `${martingaleBet[numberType].percentReturnNet}% / £${martingaleBet[numberType].currencyReturnNet}`,
+				lose: `${martingaleBet[numberType].percentTotal}% / £${martingaleBet[numberType].currencyTotal}`,
 				martingales: settings.martingales,
 				martingaleIterationNumber: data.martingaleIterationNumber
 			}
-		}
+		};
+
+		// const numberType = settings.roundUpBets? "Ceil" : "Float";
+		// const betDataProps = {
+		// 	currency: `currency${numberType}`,
+		// 	currencyReturnNet: `currency${numberType}ReturnNet`,
+		// 	currencyTotal: `currency${numberType}Total`,
+		// 	percentReturnNet: `percent${numberType}ReturnNet`,
+		// 	percentTotal: `percent${numberType}Total`
+		// };
+		// const viewObj = {
+		// 	progressIndicator: {
+		// 		value: martingaleBet[betDataProps.percentTotal],
+		// 		percent: `${martingaleBet[betDataProps.percentTotal]}%`,
+		// 		currency: `£${martingaleBet[betDataProps.currencyTotal]}`
+		// 	},
+		// 	header: {
+		// 		capital: `£${settings.capital}`,
+		// 		currentBalance: `£${data.currentBalance}`,
+		// 		brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
+		// 		martingales: settings.martingales
+		// 	},
+		// 	bet: {
+		// 		// currency: `£${martingaleBet.currencyCeil}`,
+		// 		// win: `£${martingaleBet.currencyCeilReturnNet} / ${martingaleBet.percentCeilReturnNet}%`,
+		// 		// lose: `£${martingaleBet.currencyCeilTotal} / ${martingaleBet.percentCeilTotal}%`,
+		// 		currency: `£${martingaleBet[betDataProps.currency]}`,
+		// 		win: `${martingaleBet[betDataProps.percentReturnNet]}% / £${martingaleBet[betDataProps.currencyReturnNet]}`,
+		// 		lose: `${martingaleBet[betDataProps.percentTotal]}% / £${martingaleBet[betDataProps.currencyTotal]}`,
+		// 		martingales: settings.martingales,
+		// 		martingaleIterationNumber: data.martingaleIterationNumber
+		// 	}
+		// }
+
+
 		// viewObj.header.capital = `£${settings.capital}`;
 		// viewObj.header.brokerReturn = `Broker: ${parseInt(settings.brokerReturn * 100)}%`;
 		// viewObj.bet.currency = `£${martingaleBet.currencyCeil}`;
