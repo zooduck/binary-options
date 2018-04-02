@@ -2,6 +2,7 @@ import * as dom from "./dom.service";
 
 export const settings__toggle = function settings__toggle () {
 	dom.settings.classList.toggle("active");
+	dom.main.classList.toggle("blur");
 };
 export const settings__basic__toggle = function settings__basic__toggle () {
 	dom.settings__basic.classList.toggle("active");

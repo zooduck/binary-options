@@ -31,7 +31,12 @@ export const settingsService = (function settingsService () {
 			if (typeof val != types[key]) {
 				console.error(`Invalid type! Expected ${types[key]} but got ${typeof val}.`);
 				return;
-			} else if (val) zoobinary.settings[key] = val;
+			} else if (val || val == 0) {
+				zoobinary.settings[key] = val;
+			}
+			if (key == "capital" && (val || val == 0)) {
+				zoobinary.data.currentBalance = val;
+			}
 		}
 		console.log("zoobinary updated:", zoobinary);
 	};

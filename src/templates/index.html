@@ -150,7 +150,7 @@
                 <div class="header">
                     <span class="title">SETTINGS</span>
                     <button type="button" id="ctrl__settings__toggle">
-                      <i class="ctrl material-icons md-light" >close</i>
+                      <i class="ctrl material-icons md-light">close</i>
                     </button>
                 </div>
             </div>
@@ -206,7 +206,7 @@
                 <div class="items" id="settings__advanced">
                     <div class="item">
                         <label for="ctrl__settings__advanced__open">Open</label>
-                        <span class="desc">Set this to enable charts and stats</span>
+                        <span class="desc">Your opening balance. Set this to enable charts and stats.</span>
                         <input
                             type="text"
                             name="open"
@@ -215,8 +215,8 @@
                             data-value="settings.open">
                     </div>
                     <div class="item">
-                        <label for="ctrl__settings__advanced__targetPercent">Target %</label>
-                        <span class="desc">Set this in combination with Open to enable target progress in the view</span>
+                        <label for="ctrl__settings__advanced__targetPercent">Target Percent</label>
+                        <span class="desc">Set this in combination with Open to enable target stats in the view.</span>
                         <input
                             type="text"
                             name="targetPercent"
@@ -226,7 +226,7 @@
                     </div>
                     <div class="item">
                         <label for="roundUp__SET">Round-up bets</label>
-                        <span class="desc">Round up bets to nearest single unit of currency (Recommended)</span>
+                        <span class="desc">Round up bets to nearest single unit of currency (Recommended for balances greater than 1K).</span>
                         <input type="checkbox" data-checked="settings.roundUpBets">
                     </div>
                 </div>
@@ -243,14 +243,18 @@
                     <div class="item" data-template="data.martingaleBets" data-template-item="bet">
                         <div>
                           <span>Bet:</span>
-                          <span data-template-bind="bet.index + 1">
+                          <span data-template-bind="bet.index + 1"></span>
+                          <span>:&nbsp;</span>
                         </div>
-                        <span>currencyFloat:</span>
+                        <span data-template-bind="bet.float.percentTotal + '%'"></span>
+                        <span>&nbsp;/&nbsp;</span>
+                        <span data-template-bind="bet.float.currency"></span>
+                        <!-- <span>currencyFloat:</span>
                         <span data-template-bind="bet.float.currency"></span>
                         <span>currencyFloatReturnNet:</span>
                         <span data-template-bind="bet.float.currencyReturnNet"></span>
                         <span>percentFloatTotal:</span>
-                        <span data-template-bind="bet.float.percentTotal"></span>
+                        <span data-template-bind="bet.float.percentTotal"></span> -->
                     </div>
                  </div>
             </div>

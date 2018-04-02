@@ -28,6 +28,10 @@ body#zoobinary {
 .zoobinary__panel__main {
 	align-items: baseline;
 	height: 100vh;
+	transition: filter .25s;
+}
+.zoobinary__panel__main.blur {
+	filter: blur(3px);
 }
 .zoobinary__panel__main .subpanel-A {
 	align-self: stretch;
@@ -220,6 +224,12 @@ body#zoobinary {
 
 
 
+
+
+
+
+
+
 .zoobinary__panel__settings {
 	position: fixed;
 	flex-direction: column;
@@ -237,6 +247,9 @@ body#zoobinary {
 	background-color: $background-color-base-dark;
 	// border-top: dashed rgba(255, 255, 255, 0.1);
 	user-select: none;
+
+	// background-color: $background-color-base-light;
+	// color: $color-base-light;
 }
 .zoobinary__panel__settings.active {
 	left: 0;
@@ -248,9 +261,6 @@ body#zoobinary {
 	// margin-top: 10px;
 	// background-color: rgba(0, 0, 0, .85);
 }
-// .zoobinary__panel__settings [class*="subpanel-"]:not(:first-of-type) {
-// 	margin-top: 10px;
-// }
 .zoobinary__panel__settings [class*="subpanel-"] .header {
 	display: flex;
 	justify-content: space-between;
@@ -277,18 +287,26 @@ body#zoobinary {
 	color: rgba(255, 255, 255, .5);
 	text-align: justify;
 	margin: 5px 0;
+
+	// color: rgba(0, 0, 0, .55);
 }
 .zoobinary__panel__settings [class*="subpanel-"] .item input {
 	background-color: rgba(255, 255, 255, 0.1);
 	color: #fff;
 	border: none;
 	padding: 5px;
+
+	// background-color: $input-background-color-base-light;
+	// color: $input-color-base-light;
 }
 .zoobinary__panel__settings .subpanel-A {
 	// border: solid 1px;
 }
 .zoobinary__panel__settings .subpanel-A .header {
 	background-color: transparent;
+}
+.zoobinary__panel__settings .subpanel-A .header .title {
+	font-size: 1.5em;
 }
 .zoobinary__panel__settings .subpanel-B {
 	// border: solid 1px;
@@ -298,6 +316,10 @@ body#zoobinary {
 }
 .zoobinary__panel__settings .subpanel-D {
 	// border: solid 1px;
+}
+.zoobinary__panel__settings .subpanel-D .items .item {
+	display: flex;
+	flex-direction: row;
 }
 
 .zoobinary__panel__settings .footer {
