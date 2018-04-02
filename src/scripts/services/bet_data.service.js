@@ -33,6 +33,7 @@ export const betDataService = (function () {
 		// IMPORTANT: use Floats or Ceils based on settings
 		// =================================================
 		const numberType = settings.roundUpBets? "ceil" : "float";
+		const profitLoss = `${new Number(((settings.capital / settings.open) * 100) - 100).toFixed(2)}%`;
 		const viewObj = {
 			progressIndicator: {
 				value: martingaleBet[numberType].percentTotal,
@@ -43,7 +44,8 @@ export const betDataService = (function () {
 				capital: `£${settings.capital}`,
 				currentBalance: `£${data.currentBalance}`,
 				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
-				martingales: settings.martingales
+				martingales: settings.martingales,
+				profitLoss: profitLoss
 			},
 			bet: {
 				currency: `£${martingaleBet[numberType].currency}`,
