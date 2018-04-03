@@ -11,6 +11,8 @@ export const settingsService = (function settingsService () {
 			targetPercent: 0.15,
 			roundUpBets: false
 		}
+		// zoobinary.settings.targetCurrency = zoobinary.settings.open + (zoobinary.settings.open * zoobinary.settings.targetPercent);
+		zoobinary.settings.targetCurrency = zoobinary.settings.open * zoobinary.settings.targetPercent;
 	}
 
 	$init();

@@ -45,7 +45,9 @@ export const betDataService = (function () {
 				currentBalance: `£${data.currentBalance}`,
 				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
 				martingales: settings.martingales,
-				profitLoss: profitLoss
+				profitLoss: profitLoss,
+				targetPercent: `${settings.targetPercent * 100}%`,
+				targetPercentStatus: ((settings.capital - settings.open) / settings.targetCurrency) * 100
 			},
 			bet: {
 				currency: `£${martingaleBet[numberType].currency}`,

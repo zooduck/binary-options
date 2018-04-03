@@ -72,7 +72,13 @@
                     </div>
                     <div class="item">
                       <span>P/L</span>
-                      <span data-bind="view.header.profitLoss"></span>
+                      <progress
+                        class="profit-loss-percent"
+                        max="100"
+                        data-value="view.header.targetPercentStatus"
+                        data-pseudo-before="view.header.profitLoss">
+                      </progress>
+                      <span data-bind="view.header.targetPercent"></span>
                     </div>
                 </div>
 
