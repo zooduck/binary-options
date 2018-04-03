@@ -232,18 +232,19 @@ body#zoobinary {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	border: none;
+	background-color: #362e68;
 }
 .zoobinary__panel__main .subpanel-G .item.exposure progress.exposure::-webkit-progress-bar {
 	// background-color: rgba(255, 255, 255, .75);
-	background-color: tomato;
+	background-color: #362e68;
 	// box-shadow: 0 5px 10px rgba(0, 0, 0, .55) inset;
 }
 
 .zoobinary__panel__main .subpanel-G .item.exposure progress.exposure::-webkit-progress-value {
-	background-color: rgba(0, 0, 0, .15);
+	background-color: rgba(0, 0, 0, .25);
 }
 .zoobinary__panel__main .subpanel-G .item.exposure progress.exposure::-moz-progress-bar {
-	background-color: rgba(0, 0, 0, .15);
+	background-color: rgba(0, 0, 0, .25);
 }
 .zoobinary__panel__main .subpanel-G .item.exposure progress.exposure::before {
 	content: attr(pseudo-before);
@@ -251,7 +252,7 @@ body#zoobinary {
 	// font-size: 2em;
  	top: 0;
 	left: 5px;
-	color: rgba(0, 0, 0, .55);
+	color: rgba(255, 255, 255, 1);
 	font-weight: bold;
 }
 .zoobinary__panel__main .subpanel-G .item.exposure progress.exposure::after {
@@ -260,7 +261,7 @@ body#zoobinary {
 	// font-size: 2em;
  	top: 0;
 	right: 5px;
-	color: rgba(0, 0, 0, .55);
+	color: rgba(255, 255, 255, 1);
 	font-weight: bold;
 }
 
