@@ -84,17 +84,33 @@ export const eventListenersService = (function eventListenersService () {
 		dom.ctrl__settings__martingalesDetail__toggle.addEventListener("click", function () {
 			ctrls.settings__martingalesDetail__toggle();
 		});
-		const settingsBasicCtrls = [
+		const settingsInputCtrls = [
 			dom.ctrl__settings__basic__capital,
 			dom.ctrl__settings__basic__brokerReturn,
-			dom.ctrl__settings__basic__martingales
+			dom.ctrl__settings__basic__martingales,
+			dom.ctrl__settings__advanced__open,
+			dom.ctrl__settings__advanced__targetPercent
 		];
-		for (const ctrl of settingsBasicCtrls) {
-			ctrl.addEventListener("blur", function() {
+		for (const ctrl of settingsInputCtrls) {
+			ctrl.addEventListener("change", function() {
 				const form = this.parentNode;
 				const formData = new FormData(form);
 				// update settings...
 				settingsService().set(formData);
+				// update martingale data...
+				martingaleService().update();
+			});
+		}
+		const settingsCheckboxCtrls = [
+			dom.ctrl__settings__advanced__roundUpBets
+		];
+		for (const ctrl of settingsCheckboxCtrls) {
+			ctrl.addEventListener("change", function () {
+				const data = {
+					roundUpBets: this.checked
+				};
+				// update settings...
+				settingsService().set(data)
 				// update martingale data...
 				martingaleService().update();
 			});

@@ -6,7 +6,7 @@ export const settingsService = (function settingsService () {
 		zoobinary.settings = {
 			capital: 250.00,
 			brokerReturn: 0.85,
-			martingales: 6,
+			martingales: 7,
 			open: 250.00,
 			targetPercent: 0.15,
 			roundUpBets: false
@@ -20,7 +20,10 @@ export const settingsService = (function settingsService () {
 	const types = {
 		capital: "number",
 		brokerReturn: "number",
-		martingales: "number"
+		martingales: "number",
+		open: "number",
+		targetPercent: "number",
+		roundUpBets: "boolean"
 	};
 
 	const $set = function $set (data = {}) {
@@ -29,10 +32,10 @@ export const settingsService = (function settingsService () {
 			switch (types[key]) {
 				case "string": val = val.toString(); break;
 				case "number": val = parseFloat(val); break;
+				case "boolean": val = val; break;
 			}
 			if (typeof val != types[key]) {
-				console.error(`Invalid type! Expected ${types[key]} but got ${typeof val}.`);
-				return;
+				return console.error(`Invalid type! Expected ${types[key]} but got ${typeof val} (${val}).`);
 			} else if (val || val == 0) {
 				zoobinary.settings[key] = val;
 			}
@@ -44,7 +47,6 @@ export const settingsService = (function settingsService () {
 	};
 
 	const $setWithFormData = function $setWithFormData (formData) {
-		// let formData = new FormData(form);
 		for (let pair of formData) {
 			let key = pair[0];
 			let val = pair[1];
@@ -55,7 +57,6 @@ export const settingsService = (function settingsService () {
 			}
 		}
 	};
-
 
 	console.log("zoobinary", zoobinary);
 

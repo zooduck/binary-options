@@ -18,6 +18,10 @@ export const settings__basic = document.querySelector("#settings__basic");
 export const ctrl__settings__basic__toggle = document.querySelector("#ctrl__settings__basic__toggle");
 export const settings__advanced = document.querySelector("#settings__advanced");
 export const ctrl__settings__advanced__toggle = document.querySelector("#ctrl__settings__advanced__toggle");
+export const ctrl__settings__advanced__open = document.querySelector("#ctrl__settings__advanced__open");
+export const ctrl__settings__advanced__targetPercent = document.querySelector("#ctrl__settings__advanced__targetPercent");
+export const ctrl__settings__advanced__roundUpBets = document.querySelector("#ctrl__settings__advanced__roundUpBets");
+
 export const settings__martingalesDetail = document.querySelector("#settings__martingalesDetail");
 export const ctrl__settings__martingalesDetail__toggle = document.querySelector("#ctrl__settings__martingalesDetail__toggle");
 export const ctrl__settings__basic__capital = document.querySelector("#ctrl__settings__basic__capital");

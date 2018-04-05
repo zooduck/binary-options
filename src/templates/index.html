@@ -213,8 +213,8 @@
                       <i class="ctrl material-icons md-light">expand_more</i>
                     </button>
                 </div>
-                <div class="items" id="settings__advanced">
-                    <div class="item">
+                <div class="items active" id="settings__advanced">
+                    <form class="item">
                         <label for="ctrl__settings__advanced__open">Open</label>
                         <span class="desc">Your opening balance. Set this to enable charts and stats.</span>
                         <input
@@ -223,8 +223,8 @@
                             id="ctrl__settings__advanced__open"
                             placeholder="250.00"
                             data-value="settings.open">
-                    </div>
-                    <div class="item">
+                    </form>
+                    <form class="item">
                         <label for="ctrl__settings__advanced__targetPercent">Target Percent</label>
                         <span class="desc">Set this in combination with Open to enable target stats in the view.</span>
                         <input
@@ -233,12 +233,16 @@
                             id="ctrl__settings__advanced__targetPercent"
                             placeholder="0.15"
                             data-value="settings.targetPercent">
-                    </div>
-                    <div class="item">
-                        <label for="roundUp__SET">Round-up bets</label>
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__advanced__roundUpBets">Round-up bets</label>
                         <span class="desc">Round up bets to nearest single unit of currency (Recommended for balances greater than 1K).</span>
-                        <input type="checkbox" data-checked="settings.roundUpBets">
-                    </div>
+                        <input
+                          type="checkbox"
+                          name="roundUpBets"
+                          id="ctrl__settings__advanced__roundUpBets"
+                          data-checked="settings.roundUpBets">
+                    </form>
                 </div>
             </div>
             <!-- MARTINGALES DETAIL -->
