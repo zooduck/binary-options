@@ -63,11 +63,12 @@
 
                 <div class="subpanel-D">
                     <div class="item">
-                        <span>Broker Return</span>
+                        <span>Broker</span>
                         <span data-bind="view.header.brokerReturn"></span>
                     </div>
                     <div class="item">
-                        <span>Martingales</span>
+                        <!-- <span>Martingales</span> -->
+                        <span>Chances</span>
                         <span data-bind="view.header.martingales"></span>
                     </div>
                     <div class="item">
@@ -78,7 +79,7 @@
                         data-value="view.header.targetPercentStatus"
                         data-pseudo-before="view.header.profitLoss">
                       </progress>
-                      <span data-bind="view.header.targetPercent"></span>
+                      <!-- <span data-bind="view.header.targetPercent"></span> -->
                     </div>
                 </div>
 
@@ -128,6 +129,12 @@
                         <div>
                           <i class="material-icons md-light md-48">content_cut</i>
                           <span>EXIT POSITION</span>
+                        </div>
+                        <div>
+                          <span>(</span>
+                          <span>TAKE LOSS</span>
+                          <span data-bind="view.bet.takeLoss"></span>
+                          <span>)</span>
                         </div>
                       </div>
 

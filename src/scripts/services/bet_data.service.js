@@ -27,6 +27,7 @@ export const betDataService = (function () {
 		// get data from the relevant martingale iteration...
 		let martingaleBet = data.martingaleBets[data.martingaleIterationSlot];
 		let nextMartingaleBet = data.martingaleBets[data.martingaleIterationSlot + 1] || null;
+		let previousMartingaleBet = data.martingaleBets[data.martingaleIterationSlot - 1] || null;
 
 		// let nextMartingaleBet = data.martingaleBets[data.martingaleIterationSlot + 1] || null;
 		// const nowAndNext = `£${martingaleBet[numberType].currency} / £${nextMartingaleBet[numberType].currency}`;
@@ -39,6 +40,7 @@ export const betDataService = (function () {
 		const numberType = settings.roundUpBets? "ceil" : "float";
 		const currentBetStr = `£${martingaleBet[numberType].currency}`;
 		const nextBetStr = nextMartingaleBet? `next up... £${nextMartingaleBet[numberType].currency}` : "GAME OVER";
+		const takeLossStr = previousMartingaleBet? `£${previousMartingaleBet[numberType].currencyTotal}` : "£0.00";
 		const profitLoss = `${new Number(((settings.capital / settings.open) * 100) - 100).toFixed(2)}%`;
 		const viewObj = {
 			progressIndicator: {
@@ -60,6 +62,7 @@ export const betDataService = (function () {
 				nextBet: nextBetStr,
 				win: `${martingaleBet[numberType].percentReturnNet}% / £${martingaleBet[numberType].currencyReturnNet}`,
 				lose: `${martingaleBet[numberType].percentTotal}% / £${martingaleBet[numberType].currencyTotal}`,
+				takeLoss: takeLossStr,
 				martingales: settings.martingales,
 				martingaleIterationNumber: data.martingaleIterationNumber
 			}
