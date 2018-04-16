@@ -62,8 +62,9 @@ export const viewBinderService = (function () {
 		const dataCheckedEls = Array.from(document.querySelectorAll("[data-checked]"));
 		const dataBoundEls = dataBindEls.concat(dataValEls, dataCheckedEls);
 
-		console.log(dataBoundEls);
+		// console.log(dataBoundEls);
 		// return;
+
 		for (const el of dataBoundEls) {
 			// ===========================================
 			// check for bind type (bind, value, checked)

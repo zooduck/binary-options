@@ -96,7 +96,10 @@
                               <i class="material-icons md-light md-48">stars</i>
                               <span>BET</span>
                           </div>
-                          <div data-bind="view.bet.currency"></div>
+                          <div class="bets">
+                            <div class="current-bet" data-bind="view.bet.currentBet"></div>
+                            <div class="next-bet" data-bind="view.bet.nextBet"></div>
+                          </div>
                       </div>
 
                       <label>
@@ -197,10 +200,10 @@
                         <label for="ctrl__settings__basic__martingales">Martingales</label>
                         <span class="desc">The maximum number of martingales (failed bets) that you want to accomodate. Higher values = lower risk, lower payout. Lower values = Higher risk, Higher payout.</span>
                         <input
-                            type="text"
+                            type="number"
                             name="martingales"
                             id="ctrl__settings__basic__martingales"
-                            placeholder="5"
+                            placeholder="6"
                             data-value="settings.martingales">
                     </form>
                 </div>

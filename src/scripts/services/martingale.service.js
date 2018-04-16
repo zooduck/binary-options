@@ -127,7 +127,7 @@ export const martingaleService = (function () {
 
 		});
 
-		console.table(martingaleBets);
+		// console.table(martingaleBets);
 
 		// dataService().set({
 		// 	martingaleBets: martingaleBets,
@@ -144,8 +144,10 @@ export const martingaleService = (function () {
 		// we must return a Promise because using setInterval for the loop!
 		// ------------------------------------------------------------------
 		return new Promise ( (resolve, reject) => {
-
-			let singleBet = 1;
+			const data = dataService().get();
+			const settings = settingsService().get();
+			// let singleBet = 1;
+			let singleBet = data.currentBalance / settings.martingales;
 			let betAdjustFactor = 3;
 			let betAdjust = singleBet / betAdjustFactor; // how much to adjust the singleBet by each time we go below or above the target (99-100)
 			let aboveTarget = null;
@@ -160,7 +162,14 @@ export const martingaleService = (function () {
 				if (totalBets <= targetMax && totalBets >= targetMin) {
 					clearInterval(calcBetsInterval);
 					console.warn("EFFICIENCY OF getStackedMartingales() LOOP:", efficiencyLoopCount);
-					console.table(settings);
+					// ===================================================================
+					// increase final bet up to 100%
+					// NOTE: The total of all bets will always be between 99% and 100%
+					// (this based on targetMin of 99 and targetMax of 100)
+					// - we should then use up any remaining percentage on the last bet
+					// ===================================================================
+					const onePercentToleranceDiff = 100 - totalBets;
+					bets[bets.length - 1] += onePercentToleranceDiff;
 					resolve($martingaleData(bets));
 					// return $martingaleData(bets);
 				}
