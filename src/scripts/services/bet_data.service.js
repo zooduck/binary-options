@@ -51,10 +51,10 @@ export const betDataService = (function () {
 			header: {
 				capital: `£${settings.capital}`,
 				currentBalance: `£${data.currentBalance}`,
-				brokerReturn: `${parseInt(settings.brokerReturn * 100)}%`,
+				brokerReturn: `${settings.brokerReturn}%`,
 				martingales: settings.martingales,
 				profitLoss: profitLoss,
-				targetPercent: `${settings.targetPercent * 100}%`,
+				targetPercent: `${settings.targetPercent}%`,
 				targetPercentStatus: ((settings.capital - settings.open) / settings.targetCurrency) * 100
 			},
 			bet: {

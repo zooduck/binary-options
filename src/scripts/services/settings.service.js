@@ -5,10 +5,10 @@ export const settingsService = (function settingsService () {
 	const $init = () => {
 		zoobinary.settings = {
 			capital: 250.00,
-			brokerReturn: 0.85,
+			brokerReturn: 85,
 			martingales: 6,
 			open: 250.00,
-			targetPercent: 0.15,
+			targetPercent: 15,
 			roundUpBets: false
 		}
 		// zoobinary.settings.targetCurrency = zoobinary.settings.open + (zoobinary.settings.open * zoobinary.settings.targetPercent);
@@ -26,12 +26,17 @@ export const settingsService = (function settingsService () {
 		roundUpBets: "boolean"
 	};
 
+	const $getBrokerReturnAsFloat = () => {
+		return zoobinary.settings.brokerReturn / 100;
+	};
+
 	const $set = function $set (data = {}) {
 		for (let key in data) {
 			let val = data[key];
 			switch (types[key]) {
 				case "string": val = val.toString(); break;
 				case "number": val = parseFloat(val); break;
+				// case "percent": val = parseFloat(val) / 100; break;
 				case "boolean": val = val; break;
 			}
 			if (typeof val != types[key]) {
@@ -72,6 +77,9 @@ export const settingsService = (function settingsService () {
 				if (typeof key === "string" && zoobinary.settings[key]) {
 					return zoobinary.settings[key];
 				} else return zoobinary.settings;
+			},
+			getBrokerReturnAsFloat: () => {
+				return $getBrokerReturnAsFloat();
 			}
 		}
 	}

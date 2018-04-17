@@ -21,7 +21,8 @@ export const martingaleService = (function () {
 
 	const $calcBet = (combinedBets, martingaleIteration, singleBet) => {
 
-		let cover = combinedBets / settings.brokerReturn;
+		// let cover = combinedBets / settings.brokerReturn;
+		let cover = combinedBets / settingsService().getBrokerReturnAsFloat();
 		let nextBet = singleBet * martingaleIteration;
 		return cover + nextBet;
 	};
@@ -64,13 +65,18 @@ export const martingaleService = (function () {
 			let percentCeil = currencyCeil / (settings.capital / 100);
 			percentCeilTotal += percentCeil;
 
-			let currencyFloatReturnGross = currencyFloat * settings.brokerReturn;
+			const brokerReturnAsFloat = settingsService().getBrokerReturnAsFloat();
+			// let currencyFloatReturnGross = currencyFloat * settings.brokerReturn;
+			let currencyFloatReturnGross = currencyFloat * brokerReturnAsFloat;
 			let currencyFloatReturnNet = currencyFloatReturnGross;
-			let currencyCeilReturnGross = currencyCeil * settings.brokerReturn;
+			// let currencyCeilReturnGross = currencyCeil * settings.brokerReturn;
+			let currencyCeilReturnGross = currencyCeil * brokerReturnAsFloat;
 			let currencyCeilReturnNet = currencyCeilReturnGross;
-			let percentFloatReturnGross = percentFloat * settings.brokerReturn;
+			// let percentFloatReturnGross = percentFloat * settings.brokerReturn;
+			let percentFloatReturnGross = percentFloat * brokerReturnAsFloat;
 			let percentFloatReturnNet = percentFloatReturnGross;
-			let percentCeilReturnGross = percentCeil * settings.brokerReturn;
+			// let percentCeilReturnGross = percentCeil * settings.brokerReturn;
+			let percentCeilReturnGross = percentCeil * brokerReturnAsFloat;
 			let percentCeilReturnNet = percentCeilReturnGross;
 
 			if (martingaleBets[index-1]) {

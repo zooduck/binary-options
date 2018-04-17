@@ -197,10 +197,12 @@
                         <label for="ctrl__settings__basic__brokerReturn">Broker Return</label>
                         <span class="desc">The amount of return (as a percentage) that your broker will payout for a successful bet.</span>
                         <input
-                            type="text"
+                            type="number"
+                            min="50"
+                            max="100"
                             name="brokerReturn"
                             id="ctrl__settings__basic__brokerReturn"
-                            placeholder="0.85"
+                            placeholder="85"
                             data-value="settings.brokerReturn">
                     </form>
                     <form class="item">
@@ -238,10 +240,11 @@
                         <label for="ctrl__settings__advanced__targetPercent">Target Percent</label>
                         <span class="desc">Set this in combination with Open to enable target stats in the view.</span>
                         <input
-                            type="text"
+                            type="number"
                             name="targetPercent"
+                            min="1"
                             id="ctrl__settings__advanced__targetPercent"
-                            placeholder="0.15"
+                            placeholder="15"
                             data-value="settings.targetPercent">
                     </form>
                     <form class="item">
