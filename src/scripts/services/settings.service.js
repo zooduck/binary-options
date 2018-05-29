@@ -11,11 +11,14 @@ export const settingsService = (function settingsService () {
 			targetPercent: 15,
 			roundUpBets: false
 		}
-		// zoobinary.settings.targetCurrency = zoobinary.settings.open + (zoobinary.settings.open * zoobinary.settings.targetPercent);
-		zoobinary.settings.targetCurrency = zoobinary.settings.open * zoobinary.settings.targetPercent;
+		$setTargetCurrency();
 	}
 
 	$init();
+
+	function $setTargetCurrency () {
+		zoobinary.settings.targetCurrency = zoobinary.settings.open * (zoobinary.settings.targetPercent / 100);
+	};
 
 	const types = {
 		capital: "number",
@@ -48,6 +51,7 @@ export const settingsService = (function settingsService () {
 				zoobinary.data.currentBalance = val;
 			}
 		}
+		$setTargetCurrency();
 		console.log("zoobinary updated:", zoobinary);
 	};
 
