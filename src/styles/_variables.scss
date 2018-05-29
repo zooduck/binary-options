@@ -1,11 +1,20 @@
-$background-color-base: #333;
+// $background-color-base: darkslateblue;
+$background-color-base: #fff;
+$background-color-base-light: rgba(255, 255, 255, 1);
+$background-color-base-dark: darkslateblue;
 $font-family-base: calibri, sans-serif;
 $font-size-base-standard: 16px;
-$font-size-base-mobile: 11px;
+$font-size-base-mobile: 9px;
 $font-weight-base: normal;
-$color-base: #eee;
+// $color-base: #eee;
+$color-base: #111;
+$color-base-light: rgba(0, 0, 0, .85);
+$color-base-dark: #fff;
 
-$icon-base: #555;
+$input-background-color-base-light: rgba(0, 0, 0, .1);
+$input-color-base-light: rgba(0, 0, 0, .85);
+
+$icon-base: #eee;
 
 $monitor-black: #222;
 $monitor-green: #40e240;
