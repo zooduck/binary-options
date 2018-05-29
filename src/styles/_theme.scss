@@ -130,7 +130,7 @@ body#zoobinary {
 .zoobinary__panel__main .subpanel-D .item progress.profit-loss-percent::before {
 	content: attr(pseudo-before);
 	position: absolute;
-	top: 1px;
+	top: 5px;
 	left: 5px;
 	color: rgba(0, 0, 0, .55);
 	// color: rgba(255, 255, 255, 1);
@@ -269,7 +269,7 @@ body#zoobinary {
 	content: attr(pseudo-before);
 	position: absolute;
 	// font-size: 2em;
- 	top: 0;
+ 	top: 5px;
 	left: 10px;
 	// color: rgba(255, 255, 255, 1);
 	color: rgba(0, 0, 0, .55);
@@ -279,7 +279,7 @@ body#zoobinary {
 	content: attr(pseudo-after);
 	position: absolute;
 	// font-size: 2em;
- 	top: 0;
+ 	top: 5px;
 	right: 10px;
 	// color: rgba(255, 255, 255, 1);
 	color: rgba(0, 0, 0, .55);
