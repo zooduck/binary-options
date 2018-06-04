@@ -1,6 +1,8 @@
 # Martingale calculator for Binary Options
 Automatically calculates individual bets based on the maximum number of Martingales (defined by the user).
 
+![alt text](https://github.com/zooduck/screenshots/blob/master/zoobinary/zoobinary-3.png)
+
 ### After cloning repo:
 
 `npm install`
