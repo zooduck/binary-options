@@ -14,8 +14,8 @@
     "dev-server-linux": "export NODE_ENV=development && webpack-dev-server --config=webpack.config.js --inline",
     "prebuild": "rimraf ./dist && mkdir dist && cd ./dist && mkdir img && mkdir fonts",
     "prebuild-linux": "rimraf ./dist && mkdir dist && cd ./dist && mkdir img && mkdir fonts",
-    "build": "set NODE_ENV=production && webpack --config=webpack.config.js --watch",
-    "build-linux": "export NODE_ENV=production && webpack --config=webpack.config.js --watch"
+    "build": "set NODE_ENV=production && webpack --config=webpack.config.js",
+    "build-linux": "export NODE_ENV=production && webpack --config=webpack.config.js"
   },
   "author": "zooduck",
   "license": "ISC",

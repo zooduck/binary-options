@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="author" content="zooduck">
+        <link rel="manifest" href="./manifest.json">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>ZOOBINARY</title>
+    <link href="zoobinary.bundle.css" rel="stylesheet"></head>
+    <body id="zoobinary">
+
+
+        <!-- svg -->
+        <svg width="0" height="0" style="display: none">
+            <defs>
+                <g id="zoobinaryIcon">
+                    <rect x="0" y="0" width="5" height="25" class="zoobinary__header__logo__icon__rect__up" />
+                    <rect x="5" y="0" width="5" height="5" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="10" y="5" width="5" height="2.5" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="15" y="7.5" width="5" height="10" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="20" y="10" width="5" height="7.5" class="zoobinary__header__logo__icon__rect__up" />
+                    <rect x="25" y="0" width="5" height="10" class="zoobinary__header__logo__icon__rect__up" />
+                    <rect x="30" y="0" width="5" height="20" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="35" y="20" width="5" height="1.25" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="40" y="21.25" width="5" height="3.525" class="zoobinary__header__logo__icon__rect__down" />
+                    <rect x="45" y="0" width="5" height="25" class="zoobinary__header__logo__icon__rect__up" />
+                </g>
+            </defs>
+        </svg>
+        <!-- // svg -->
+
+
+        <!-- templates -->
+        <!-- // templates -->
+
+
+        <!-- loading-screen -->
+        <!-- // loading-screen -->
+
+
+        <!-- alert -->
+        <!-- // alert -->
+
+
+
+        <div class="zoobinary__panel__main" id="main">
+
+           <!--  <div class="subpanel-A">
+                <i class="material-icons md-48 md-light">menu</i>
+            </div> -->
+
+            <div class="subpanel-B">
+
+                <div class="subpanel-C light">
+                    <i class="ctrl material-icons md-36 md-dark" id="ctrl__menu__toggle">perm_identity</i>
+                    <span class="item title">ZOOBINARY</span>
+                    <div class="item capital">
+                      <i class="material-icons md-36 md-dark">account_balance</i>
+                      <span data-bind="view.header.currentBalance"></span>
+                    </div>
+                </div>
+
+                <div class="subpanel-D">
+                    <div class="item">
+                        <span>Broker</span>
+                        <span data-bind="view.header.brokerReturn"></span>
+                    </div>
+                    <div class="item">
+                        <!-- <span>Martingales</span> -->
+                        <span>Chances</span>
+                        <span data-bind="view.header.martingales"></span>
+                    </div>
+                    <div class="item">
+                      <span>P/L</span>
+                      <progress
+                        class="profit-loss-percent"
+                        max="100"
+                        data-value="view.header.targetPercentStatus"
+                        data-pseudo-before="view.header.profitLoss">
+                      </progress>
+                      <!-- <span data-bind="view.header.targetPercent"></span> -->
+                    </div>
+                </div>
+
+                <div class="subpanel-E">
+
+                    <div class="subpanel-F" id="main__martingaleCounters">
+                        <span class="current-martingale" data-bind="view.bet.martingaleIterationNumber"></span>
+                        <span class="total-martingales">/</span>
+                        <span class="total-martingales" data-bind="view.bet.martingales"></span>
+                    </div>
+
+                    <div class="subpanel-G">
+                      <div class="item bet">
+                          <div>
+                              <i class="material-icons md-light md-48">stars</i>
+                              <span>BET</span>
+                          </div>
+                          <div class="bets">
+                            <div class="current-bet" data-bind="view.bet.currentBet"></div>
+                            <div class="next-bet" data-bind="view.bet.nextBet"></div>
+                          </div>
+                      </div>
+
+                      <label>
+                        <input type="radio" name="betStatus">
+                        <div class="item win" id="main__infoBar__win">
+                            <div>
+                                <i class="material-icons md-light md-48">sentiment_very_satisfied</i>
+                                <span>WIN</span>
+                            </div>
+                            <div data-bind="view.bet.win"></div>
+                        </div>
+                      </label>
+
+                      <label>
+                        <input type="radio" name="betStatus">
+                        <div class="item lose" id="main__infoBar__lose">
+                            <div>
+                                <i class="material-icons md-light md-48">sentiment_very_dissatisfied</i>
+                                <span>LOSE</span>
+                            </div>
+                            <div data-bind="view.bet.lose"></div>
+                        </div>
+                      </label>
+
+                      <div class="item exit" id="main__infoBar__exit">
+                        <div>
+                          <i class="material-icons md-light md-48">content_cut</i>
+                          <span>EXIT POSITION</span>
+                        </div>
+                        <div>
+                          <span>(</span>
+                          <span>TAKE LOSS</span>
+                          <span data-bind="view.bet.takeLoss"></span>
+                          <span>)</span>
+                        </div>
+                      </div>
+
+                      <div class="item exposure">
+                        <!-- <span>
+                          <i class="material-icons md-48 md-light">warning</i>
+                        </span> -->
+                        <progress
+                          class="exposure"
+                          data-value="view.progressIndicator.value"
+                          data-pseudo-before="view.progressIndicator.percent"
+                          data-pseudo-after="view.progressIndicator.currency"
+                          max="100">
+                        </progress>
+                      </div>
+
+                    </div><!-- // subpanel-G -->
+
+                </div><!-- // subpanel-E -->
+
+            </div><!-- // subpanel-B -->
+
+        </div><!-- // zoobinary__panel__main -->
+
+
+
+        <!-- /\/\/\/\ -->
+        <!-- SETTINGS -->
+        <!-- /\/\/\/\ -->
+
+        <div class="zoobinary__panel__settings" id="settings">
+            <div class="subpanel-A">
+                <div class="header">
+                    <span class="title">SETTINGS</span>
+                    <button type="button" id="ctrl__settings__toggle">
+                      <i class="ctrl material-icons md-light">close</i>
+                    </button>
+                </div>
+            </div>
+            <!-- BASIC -->
+            <div class="subpanel-B">
+                <div class="header">
+                    <span class="title">BASIC</span>
+                    <button type="button" id="ctrl__settings__basic__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
+                </div>
+                <div class="items active" id="settings__basic">
+                    <form class="item">
+                        <label for="ctrl__settings__basic__capital">Capital</label>
+                        <span class="desc">Your current balance</span>
+                        <input
+                            type="text"
+                            name="capital"
+                            id="ctrl__settings__basic__capital"
+                            placeholder="1985.19"
+                            data-value="settings.capital">
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__basic__brokerReturn">Broker Return</label>
+                        <span class="desc">The amount of return (as a percentage) that your broker will payout for a successful bet.</span>
+                        <input
+                            type="number"
+                            min="50"
+                            max="100"
+                            name="brokerReturn"
+                            id="ctrl__settings__basic__brokerReturn"
+                            placeholder="85"
+                            data-value="settings.brokerReturn">
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__basic__martingales">Martingales</label>
+                        <span class="desc">The maximum number of martingales (failed bets) that you want to accomodate. Higher values = lower risk, lower payout. Lower values = Higher risk, Higher payout.</span>
+                        <input
+                            type="number"
+                            name="martingales"
+                            id="ctrl__settings__basic__martingales"
+                            placeholder="6"
+                            data-value="settings.martingales">
+                    </form>
+                </div>
+            </div>
+            <!-- ADVANCED -->
+            <div class="subpanel-C">
+                 <div class="header">
+                    <span class="title">ADVANCED</span>
+                    <button type="button" id="ctrl__settings__advanced__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
+                </div>
+                <div class="items active" id="settings__advanced">
+                    <form class="item">
+                        <label for="ctrl__settings__advanced__open">Open</label>
+                        <span class="desc">Your opening balance. Set this to enable charts and stats.</span>
+                        <input
+                            type="text"
+                            name="open"
+                            id="ctrl__settings__advanced__open"
+                            placeholder="250.00"
+                            data-value="settings.open">
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__advanced__targetPercent">Target Percent</label>
+                        <span class="desc">Set this in combination with Open to enable target stats in the view.</span>
+                        <input
+                            type="number"
+                            name="targetPercent"
+                            min="1"
+                            id="ctrl__settings__advanced__targetPercent"
+                            placeholder="15"
+                            data-value="settings.targetPercent">
+                    </form>
+                    <form class="item">
+                        <label for="ctrl__settings__advanced__roundUpBets">Round-up bets</label>
+                        <span class="desc">Round up bets to nearest single unit of currency (Recommended for balances greater than 1K).</span>
+                        <input
+                          type="checkbox"
+                          name="roundUpBets"
+                          id="ctrl__settings__advanced__roundUpBets"
+                          data-checked="settings.roundUpBets">
+                    </form>
+                </div>
+            </div>
+            <!-- MARTINGALES DETAIL -->
+            <div class="subpanel-D">
+                <div class="header">
+                    <span class="title">MARTINGALES DETAIL</span>
+                    <button type="button" id="ctrl__settings__martingalesDetail__toggle">
+                      <i class="ctrl material-icons md-light">expand_more</i>
+                    </button>
+                </div>
+                 <div class="items active" id="settings__martingalesDetail">
+                    <div class="item" data-template="data.martingaleBets" data-template-item="bet">
+                        <div>
+                          <span>Bet:</span>
+                          <span data-template-bind="bet.index + 1"></span>
+                          <span>:&nbsp;</span>
+                        </div>
+                        <span data-template-bind="bet.float.percentTotal + '%'"></span>
+                        <span>&nbsp;/&nbsp;</span>
+                        <span data-template-bind="bet.float.currency"></span>
+                        <!-- <span>currencyFloat:</span>
+                        <span data-template-bind="bet.float.currency"></span>
+                        <span>currencyFloatReturnNet:</span>
+                        <span data-template-bind="bet.float.currencyReturnNet"></span>
+                        <span>percentFloatTotal:</span>
+                        <span data-template-bind="bet.float.percentTotal"></span> -->
+                    </div>
+                 </div>
+            </div>
+            <div class="footer"></div>
+        </div><!-- // zoobinary__panel__settings -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="zoobinary__settings-container" style="display: none;">
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setCapital">
+                    <label for="zoobinaryFormInput_capital">CAPITAL</label>
+                    <input id="zoobinaryFormInput_capital" name="capital" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setCapital">set capital</button>
+            </div>
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setBrokerReturn">
+                    <label for="zoobinaryFormInput_brokerReturn">BROKER RETURN</label>
+                    <input id="zoobinaryFormInput_brokerReturn" name="brokerReturn" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setBrokerReturn">set broker return</button>
+            </div>
+            <div class="zoobinary__settings-container__setting">
+                <form class="zoobinary__settings-container__form" id="zoobinaryForm_setMartingales">
+                    <label for="zoobinaryFormInput_martingales">MARTINGALES</label>
+                    <input id="zoobinaryFormInput_martingales" name="martingales" type="text" />
+                </form>
+                <button id="zoobinaryFormCtrl_setMartingales">set martingales</button>
+            </div>
+        </div> <!-- // zoobinary__settings-container -->
+
+
+
+
+    <script type="text/javascript" src="dependencies.bundle.js"></script><script type="text/javascript" src="zoobinary.bundle.js"></script></body>
+</html>

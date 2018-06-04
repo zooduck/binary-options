@@ -1,0 +1,11 @@
+{
+  "name": "zoobinary",
+  "short_name": "zoobinary",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "dependencies.js": "dependencies.bundle.js",
+  "zoobinary.css": "zoobinary.bundle.css",
+  "zoobinary.css.map": "zoobinary.bundle.css.map",
+  "zoobinary.js": "zoobinary.bundle.js"
+}
