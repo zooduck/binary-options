@@ -44,7 +44,7 @@ const CONFIG = {
         new WEBPACK.HotModuleReplacementPlugin(),
         new WEBPACK.NamedModulesPlugin(),
         new HTML_WEBPACK_PLUGIN({
-          template: "./src/templates/index.html"
+          template: "./src/index.html"
         }),
         new MANIFEST_PLUGIN({
             seed: {              
